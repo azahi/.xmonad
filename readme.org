@@ -1,0 +1,2 @@
+* azahi's XMonad configuration (xmonad-ng)
+Moduled after [[https://github.com/pjones/xmonadrc][pjones']] xmonadrc this configuration has a few unique points to it.
