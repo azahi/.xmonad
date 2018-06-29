@@ -1,3 +1,15 @@
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  XMonad.Custom.Startup
+-- Copyright   :  (c) azahi 2018
+-- License     :  BSD3-style (see LICENSE)
+--
+-- Maintainer  :  azahi@teknik.io
+-- Stability   :  unstable
+-- Portability :  unportable
+--
+------------------------------------------------------------------------
+
 module XMonad.Custom.Startup
     ( startupHook'
     ) where
@@ -12,25 +24,25 @@ import           XMonad.Util.SpawnNamedPipe
 
 atomsToFullscreen :: [String]
 atomsToFullscreen =
-    [ "_NET_ACTIVE_WINDOW"
-    , "_NET_CLIENT_LIST"
-    , "_NET_CLIENT_LIST_STACKING"
-    , "_NET_DESKTOP_NAMES"
-    , "_NET_WM_DESKTOP"
-    , "_NET_WM_STATE"
-    , "_NET_WM_STATE_FULLSCREEN"
-    , "_NET_WM_STATE_HIDDEN"
-    , "_NET_WM_STRUT"
-    ]
+  [ "_NET_ACTIVE_WINDOW"
+  , "_NET_CLIENT_LIST"
+  , "_NET_CLIENT_LIST_STACKING"
+  , "_NET_DESKTOP_NAMES"
+  , "_NET_WM_DESKTOP"
+  , "_NET_WM_STATE"
+  , "_NET_WM_STATE_FULLSCREEN"
+  , "_NET_WM_STATE_HIDDEN"
+  , "_NET_WM_STRUT"
+  ]
 
 addNETSupported :: Atom -> X ()
 addNETSupported x = withDisplay $ \d -> do
-    r  <- asks theRoot
-    ns <- getAtom "_NET_SUPPORTED"
-    a  <- getAtom "ATOM"
+    r <- asks theRoot
+    n <- getAtom "_NET_SUPPORTED"
+    a <- getAtom "ATOM"
     liftIO $ do
-        s <- (join . maybeToList) <$> getWindowProperty32 d ns r
-        when (fromIntegral x `notElem` s) $ changeProperty32 d r ns a propModeAppend [fromIntegral x]
+        p <- (join . maybeToList) <$> getWindowProperty32 d n r
+        when (fromIntegral x `notElem` p) $ changeProperty32 d r n a propModeAppend [fromIntegral x]
 
 addEWMHFullscreen :: X ()
 addEWMHFullscreen = do

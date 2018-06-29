@@ -1,10 +1,25 @@
 {-# LANGUAGE DeriveDataTypeable    #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeSynonymInstances  #-}
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
+
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  XMonad.Custom.Layout
+-- Copyright   :  (c) azahi 2018
+-- License     :  BSD3-style (see LICENSE)
+--
+-- Maintainer  :  azahi@teknik.io
+-- Stability   :  unstable
+-- Portability :  unportable
+--
+-- Custom target for layouts, sublayouts and layout transformers.
+--
+------------------------------------------------------------------------
 
 module XMonad.Custom.Layout
     ( layoutHook'
-    , Transformers (..)
+    , CustomTransformers (..)
     ) where
 
 import           XMonad
@@ -36,10 +51,10 @@ applyGaps = gaps [ (U, gapBase)
                  , (L, gapBase)
                  ]
 
-data Transformers = GAPS
-                  deriving (Read, Show, Eq, Typeable)
+data CustomTransformers = GAPS
+                        deriving (Read, Show, Eq, Typeable)
 
-instance Transformer Transformers Window where
+instance Transformer CustomTransformers Window where
     transform GAPS x k = k (avoidStruts $ applyGaps $ applySpacing x) (const x)
 
 layoutHook' = fullscreenFloat

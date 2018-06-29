@@ -1,3 +1,17 @@
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  XMonad.Custom.Bindings
+-- Copyright   :  (c) azahi 2018
+-- License     :  BSD3-style (see LICENSE)
+--
+-- Maintainer  :  azahi@teknik.io
+-- Stability   :  unstable
+-- Portability :  unportable
+--
+-- Custom target for keyboard/mouse bindings.
+--
+------------------------------------------------------------------------
+
 module XMonad.Custom.Bindings
     ( showKeyBindings
     , modMask'
@@ -10,13 +24,13 @@ import qualified Data.Map                            as M
 import           System.Exit
 import           System.IO
 import           XMonad
+import qualified XMonad.Actions.ConstrainedResize    as C
 import           XMonad.Actions.CopyWindow
-import qualified XMonad.Actions.ConstrainedResize as C
 import           XMonad.Actions.CycleWS
-import qualified XMonad.Actions.FlexibleManipulate as F
 import           XMonad.Actions.DynamicProjects
-import XMonad.Actions.FloatSnap
 import           XMonad.Actions.DynamicWorkspaces
+import qualified XMonad.Actions.FlexibleManipulate   as F
+import           XMonad.Actions.FloatSnap
 import           XMonad.Actions.FloatSnapSpaced
 import           XMonad.Actions.MessageFeedback
 import           XMonad.Actions.Navigation2D
@@ -66,7 +80,7 @@ directions = [D, U, L, R]
 arrowKeys, directionKeys, wsKeys :: [String]
 arrowKeys     = [ "<D>" , "<U>" , "<L>" , "<R>" ]
 directionKeys = [  "j"  ,  "k"  ,  "h"  ,  "l"  ]
-wsKeys        = map show [1 .. 9 :: Int]
+wsKeys        = map show [1..9 :: Int]
 
 zipM  :: [a] -> String -> [[a]] -> [t] -> (t ->       X ()) ->       [([a], NamedAction)]
 zipM  m nm ks as f   = zipWith (\k d -> (m ++ k, addName nm $ f d))   ks as
@@ -77,15 +91,13 @@ tryMessageR_ :: (Message a, Message b) => a -> b -> X ()
 tryMessageR_ x y = sequence_ [tryMessage_ x y, refresh]
 
 xSelectionNotify :: MonadIO m => m ()
-xSelectionNotify = join
-                 $ io
-                 $ (unsafeSpawn . (\x -> CM.notify CM.customApplications ++ " Clipboard " ++ wrap "\"\\\"" "\"\\\"" x))
-                   <$> getSelection
+xSelectionNotify = join $ io
+    $ (unsafeSpawn . (\x -> CM.notify CM.customApplications ++ " Clipboard " ++ wrap "\"\\\"" "\"\\\"" x)) <$> getSelection
 
 toggleCopyToAll :: X ()
 toggleCopyToAll = wsContainingCopies >>= \x -> case x of
-                                                    [] -> windows copyToAll
-                                                    _  -> killAllOtherCopies
+                                                   [] -> windows copyToAll
+                                                   _  -> killAllOtherCopies
 
 getSortByIndexNonSP :: X ([WindowSpace] -> [WindowSpace])
 getSortByIndexNonSP = (. namedScratchpadFilterOutWorkspace) <$> getSortByIndex
@@ -96,20 +108,21 @@ prevNonEmptyWS = findWorkspace getSortByIndexNonSP Prev HiddenNonEmptyWS 1 >>= \
 
 toggleFloat :: Window -> X ()
 toggleFloat w = windows (\s -> if M.member w (S.floating s)
-                                  then S.sink w s
+                               then S.sink w s
                                   else S.float w (S.RationalRect (1/2 - 1/4) (1/2 - 1/4) (1/2) (1/2)) s)
 
 keyBindings :: XConfig Layout -> [((KeyMask, KeySym), NamedAction)]
-keyBindings c = let subKeys s ks = subtitle s:mkNamedKeymap c ks in
+keyBindings c =
+    let subKeys s ks = subtitle s:mkNamedKeymap c ks
+    in
     subKeys "System"
-    [ ("M-q"    , addName "Restart XMonad"             $ spawn "/usr/bin/xmonad --restart")
-    , ("M-C-q"  , addName "Recompile & restart XMonad" $ spawn "/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart")
-    , ("M-S-q"  , addName "Quit XMonad"                $ confirmPrompt hotPromptTheme "Quit XMonad?" $ io exitSuccess)
-    , ("M-x"    , addName "Shell prompt"               $ shellPrompt promptTheme)
-    , ("M-o"    , addName "Goto W prompt"              $ windowPrompt promptTheme Goto allWindows)
-    , ("M-S-o"  , addName "Bring W prompt"             $ windowPrompt promptTheme Bring allWindows)
+    [ ("M-q"   , addName "Restart XMonad"             $ spawn "/usr/bin/xmonad --restart")
+    , ("M-C-q" , addName "Recompile & restart XMonad" $ spawn "/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart")
+    , ("M-S-q" , addName "Quit XMonad"                $ confirmPrompt hotPromptTheme "Quit XMonad?" $ io exitSuccess)
+    , ("M-x"   , addName "Shell prompt"               $ shellPrompt promptTheme)
+    , ("M-o"   , addName "Goto W prompt"              $ windowPrompt promptTheme Goto allWindows)
+    , ("M-S-o" , addName "Bring W prompt"             $ windowPrompt promptTheme Bring allWindows)
     ]
-
     ^++^
     subKeys "Actions"
     [ ("M-C-g"             , addName "Cancel"                                    $ return ())
@@ -136,9 +149,8 @@ keyBindings c = let subKeys s ks = subtitle s:mkNamedKeymap c ks in
     , ("M-C-t"             , addName "Toggle trackpoint on/off"                  $ spawn "~/.xmonad/bin/\
                                                                                          \toggle-trackpoint.sh")
     ]
-
     ^++^
-    subKeys "Volume & Music" -- TODO replace play/pause script with Haskell implementation
+    subKeys "Volume & Music"
     [ ("<XF86AudioMute>"        , addName "ALSA: Mute"         $ void   toggleMute)
     , ("<XF86AudioLowerVolume>" , addName "ALSA: Lower volume" $ void $ lowerVolume 5)
     , ("<XF86AudioRaiseVolume>" , addName "ALSA: Raise volume" $ void $ raiseVolume 5)
@@ -147,7 +159,6 @@ keyBindings c = let subKeys s ks = subtitle s:mkNamedKeymap c ks in
     , ("<XF86AudioPrev>"        , addName "MPD: Previos track" $ spawn "/usr/bin/mpc --no-status prev")
     , ("<XF86AudioNext>"        , addName "MPD: Next track"    $ spawn "/usr/bin/mpc --no-status next")
     ]
-
     ^++^
     subKeys "Spawnables"
     [ ("M-<Return>" , addName "Terminal"         $ spawn (CM.term CM.customApplications))
@@ -158,38 +169,34 @@ keyBindings c = let subKeys s ks = subtitle s:mkNamedKeymap c ks in
     , ("M-t"        , addName "NSP Top"          $ namedScratchpadAction scratchpads "top")
     , ("M-v"        , addName "NSP Volume"       $ namedScratchpadAction scratchpads "volume")
     ]
-
     ^++^
     subKeys "Windows"
-    ( [ ("M-d"     , addName "Kill W"                     kill)
-      , ("M-S-d"   , addName "Kill all W on WS"         $ confirmPrompt hotPromptTheme "Kill all" killAll)
-      , ("M-C-d"   , addName "Duplicate W to all WS"      toggleCopyToAll)
-      , ("M-a"     , addName "Hide W"                   $ withFocused hideWindow) -- FIXME This is so broken
-      , ("M-S-a"   , addName "Restore hidden W"           popOldestHiddenWindow)
-      , ("M-p"     , addName "Promote W"                  promote)
-      , ("M-s"     , addName "Merge W from sublayout"   $ withFocused $ sendMessage . MergeAll)
-      , ("M-S-s"   , addName "Unmerge W from sublayout" $ withFocused $ sendMessage . UnMerge)
-      , ("M-u"     , addName "Focus urgent W"             focusUrgent)
-      , ("M-e"     , addName "Focus master W"           $ windows S.focusMaster)
-      , ("M-'"     , addName "Navigate tabbed W -> D"   $ bindOn LD [ ("Tabs" , windows S.focusDown)
+    ( [ ("M-d"   , addName "Kill W"                     kill)
+      , ("M-S-d" , addName "Kill all W on WS"         $ confirmPrompt hotPromptTheme "Kill all" killAll)
+      , ("M-C-d" , addName "Duplicate W to all WS"      toggleCopyToAll)
+      , ("M-a"   , addName "Hide W"                   $ withFocused hideWindow) -- FIXME This is so broken
+      , ("M-S-a" , addName "Restore hidden W"           popOldestHiddenWindow)
+      , ("M-p"   , addName "Promote W"                  promote)
+      , ("M-s"   , addName "Merge W from sublayout"   $ withFocused $ sendMessage . MergeAll)
+      , ("M-S-s" , addName "Unmerge W from sublayout" $ withFocused $ sendMessage . UnMerge)
+      , ("M-u"   , addName "Focus urgent W"             focusUrgent)
+      , ("M-e"   , addName "Focus master W"           $ windows S.focusMaster)
+      , ("M-'"   , addName "Navigate tabbed W -> D"   $ bindOn LD [ ("Tabs" , windows S.focusDown)
                                                                     , (""     , onGroup S.focusDown')
                                                                     ])
-      , ("M-;"     , addName "Navigate tabbed W -> U"   $ bindOn LD [ ("Tabs" , windows S.focusUp)
+      , ("M-;"   , addName "Navigate tabbed W -> U"   $ bindOn LD [ ("Tabs" , windows S.focusUp)
                                                                     , (""     , onGroup S.focusUp')
                                                                     ])
-      , ("M-S-'"   , addName "Swap tabbed W -> D"       $ windows S.swapDown)
-      , ("M-S-;"   , addName "Swap tabbed W -> U"       $ windows S.swapUp)
+      , ("M-S-'" , addName "Swap tabbed W -> D"       $ windows S.swapDown)
+      , ("M-S-;" , addName "Swap tabbed W -> U"       $ windows S.swapUp)
       ]
-
       ++ zipM' "M-"   "Navigate W"             directionKeys directions windowGo   True -- TODO W moving
       ++ zipM' "M-S-" "Swap W"                 directionKeys directions windowSwap True
       ++ zipM  "M-C-" "Merge W with sublayout" directionKeys directions (sendMessage . pullGroup)
-
       ++ zipM' "M-"   "Navigate screen"        arrowKeys directions screenGo       True
       ++ zipM' "M-S-" "Move W to screen"       arrowKeys directions windowToScreen True
       ++ zipM' "M-C-" "Swap W to screen"       arrowKeys directions screenSwap     True
     )
-
     ^++^
     subKeys "Workspaces & Projects"
     ( [ ("M-w"   , addName "Switch to project"     $ switchProjectPrompt  promptTheme)
@@ -199,12 +206,10 @@ keyBindings c = let subKeys s ks = subtitle s:mkNamedKeymap c ks in
       , ("M-i"   , addName "Toggle last WS"        $ toggleWS' ["NSP"])
       , ("M-`"   , addName "WS prompt"             $ workspacePrompt promptTheme $ windows . S.shift)
       ]
-
       ++ zipM "M-"     "View WS"      wsKeys [0 ..] (withNthWorkspace S.greedyView)
       ++ zipM "M-S-"   "Move W to WS" wsKeys [0 ..] (withNthWorkspace S.shift)
       ++ zipM "M-C-S-" "Copy W to WS" wsKeys [0 ..] (withNthWorkspace copy)
     )
-
     ^++^
     subKeys "Layout Management"
     [ ("M-<Tab>"   , addName "Cycle layouts"            $ sendMessage NextLayout)
@@ -221,7 +226,6 @@ keyBindings c = let subKeys s ks = subtitle s:mkNamedKeymap c ks in
                                                                     ])
     , ("M-S-g"     , addName "Toggle gapped layout"     $ sendMessage $ Toggle GAPS) -- FIXME Breaks merged tabbed layout
     ]
-
     ^++^
     subKeys "Resize"
     [ ("M-["     , addName "Expand L" $ tryMessageR_ (ExpandTowards L) Shrink)
@@ -236,20 +240,24 @@ keyBindings c = let subKeys s ks = subtitle s:mkNamedKeymap c ks in
 
 mouseBindings' :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
 mouseBindings' XConfig {XMonad.modMask = m} = M.fromList
-    [ ((m,               button1), \w -> focus w >> F.mouseWindow F.position w
-                                                 >> ifClick (snapSpacedMagicMove gapBase  (Just 50) (Just 50) w)
-                                                 >> windows S.shiftMaster
+    [ ((m,               button1), \w -> focus w
+                                         >> F.mouseWindow F.position w
+                                         >> ifClick (snapSpacedMagicMove gapBase  (Just 50) (Just 50) w)
+                                         >> windows S.shiftMaster
       )
-    , ((m .|. shiftMask, button1), \w -> focus w >> C.mouseResizeWindow w True
-                                                 >> ifClick (snapMagicResize [L, R, U, D] (Just 50) (Just 50) w)
-                                                 >> windows S.shiftMaster
+    , ((m .|. shiftMask, button1), \w -> focus w
+                                         >> C.mouseResizeWindow w True
+                                         >> ifClick (snapMagicResize [L, R, U, D] (Just 50) (Just 50) w)
+                                         >> windows S.shiftMaster
       )
-    , ((m,               button3), \w -> focus w >> F.mouseWindow F.linear w
-                                                 >> ifClick (snapMagicResize [L, R]       (Just 50) (Just 50) w)
-                                                 >> windows S.shiftMaster
+    , ((m,               button3), \w -> focus w
+                                         >> F.mouseWindow F.linear w
+                                         >> ifClick (snapMagicResize [L, R]       (Just 50) (Just 50) w)
+                                         >> windows S.shiftMaster
       )
-    , ((m .|. shiftMask, button3), \w -> focus w >> C.mouseResizeWindow w True
-                                                 >> ifClick (snapMagicResize [U, D]       (Just 50) (Just 50) w)
-                                                 >> windows S.shiftMaster
+    , ((m .|. shiftMask, button3), \w -> focus w
+                                         >> C.mouseResizeWindow w True
+                                         >> ifClick (snapMagicResize [U, D]       (Just 50) (Just 50) w)
+                                         >> windows S.shiftMaster
       )
     ]

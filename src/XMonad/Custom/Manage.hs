@@ -1,3 +1,17 @@
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  XMonad.Custom.Manage
+-- Copyright   :  (c) azahi 2018
+-- License     :  BSD3-style (see LICENSE)
+--
+-- Maintainer  :  azahi <azahi@teknik.io>
+-- Stability   :  unstable
+-- Portability :  unportable
+--
+-- Custom target for container (window) management.
+--
+-----------------------------------------------------------------------------
+
 module XMonad.Custom.Manage
     ( manageHook'
     ) where
@@ -16,12 +30,12 @@ composeActions =
     , appName =? "eterm"                                        -?> tileBelow
     , className =? "Pinentry"                                   -?> doCenterFloat
     , className =? "Steam" <&&> not <$> title =? "Steam"        -?> doFloat
-    , className =? "URxvt"                                      -?> tileBelow
     , className =? "Xmessage"                                   -?> doCenterFloat
     , className =? "Zenity"                                     -?> doCenterFloat
     , className =? "explorer.exe"                               -?> doFullFloat
     , className =? "qemu-system-x86"                            -?> doCenterFloat
     , className =? "qemu-system-x86_64"                         -?> doCenterFloat
+    , className =? "urxvt"                                      -?> tileBelow
     , className =? "xterm"                                      -?> tileBelow
     , isDialog                                                  -?> doCenterFloat
     , isFullscreen                                              -?> doFullFloat

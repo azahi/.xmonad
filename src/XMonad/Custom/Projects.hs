@@ -1,3 +1,17 @@
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  XMonad.Custom.Projects
+-- Copyright   :  (c) azahi 2018
+-- License     :  BSD3-style (see LICENSE)
+--
+-- Maintainer  :  azahi@teknik.io
+-- Stability   :  unstable
+-- Portability :  unportable
+--
+-- Custom target for projects.
+--
+------------------------------------------------------------------------
+
 module XMonad.Custom.Projects
     ( projects
     ) where

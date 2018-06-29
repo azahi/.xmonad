@@ -1,3 +1,15 @@
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  XMonad.Custom.Scratchpads
+-- Copyright   :  (c) azahi 2018
+-- License     :  BSD3-style (see LICENSE)
+--
+-- Maintainer  :  azahi@teknik.io
+-- Stability   :  unstable
+-- Portability :  unportable
+--
+------------------------------------------------------------------------
+
 module XMonad.Custom.Scratchpads
     ( scratchpads
     ) where

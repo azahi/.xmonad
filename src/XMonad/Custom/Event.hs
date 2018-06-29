@@ -1,3 +1,17 @@
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  XMonad.Custom.Event
+-- Copyright   :  (c) azahi 2018
+-- License     :  BSD3-style (see LICENSE)
+--
+-- Maintainer  :  azahi@teknik.io
+-- Stability   :  unstable
+-- Portability :  unportable
+--
+-- Custom target for layouts, sublayouts and everything in between.
+--
+------------------------------------------------------------------------
+
 module XMonad.Custom.Event
     ( handleEventHook'
     ) where

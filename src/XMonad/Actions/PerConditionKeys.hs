@@ -1,3 +1,15 @@
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  XMonad.Actions.PerConditionKeys
+-- Copyright   :  (c) azahi 2018
+-- License     :  BSD3-style (see LICENSE)
+--
+-- Maintainer  :  azahi@teknik.io
+-- Stability   :  unstable
+-- Portability :  unportable
+--
+------------------------------------------------------------------------
+
 module XMonad.Actions.PerConditionKeys
     ( XCond(..)
     , chooseAction
