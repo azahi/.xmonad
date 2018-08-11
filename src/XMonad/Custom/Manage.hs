@@ -8,8 +8,6 @@
 -- Stability   :  unstable
 -- Portability :  unportable
 --
--- Custom target for container (window) management.
---
 -----------------------------------------------------------------------------
 
 module XMonad.Custom.Manage

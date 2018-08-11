@@ -8,7 +8,7 @@
 -- Stability   :  unstable
 -- Portability :  unportable
 --
-------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 module XMonad.Custom.Scratchpads
     ( scratchpads

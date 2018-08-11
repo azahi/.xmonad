@@ -8,9 +8,7 @@
 -- Stability   :  unstable
 -- Portability :  unportable
 --
--- Custom target for layouts, sublayouts and everything in between.
---
-------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 module XMonad.Custom.Event
     ( handleEventHook'

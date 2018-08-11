@@ -1,5 +1,5 @@
 name:          xmonad-ng
-version:       0.2.0.1
+version:       0.2.1.0
 synopsis:      azahi's XMonad configuration
 description:   azahi's XMonad configuration based on stolen code and bad Haskell knowledge
 homepage:      https://github.com/azahi/xmonad-ng
@@ -11,27 +11,50 @@ copyright:     Copyright (c) 2018 azahi
 category:      System
 build-type:    Simple
 stability:     experimental
-cabal-version: >=1.10
+cabal-version: >= 1.10
 
 source-repository head
-    type: git
+    type:     git
     location: https://github.com/azahi/xmonad-ng
 
 library
-    exposed-modules:
-        XMonad.Actions.FloatSnapSpaced
-        XMonad.Actions.PerConditionKeys
-    ghc-options: -Wall
+    ghc-options:      -Wall
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+    exposed-modules: XMonad.Actions.FloatSnapSpaced
+                   , XMonad.Actions.PerConditionKeys
+
     build-depends: base           >= 4.9    && < 4.10
                  , containers     >= 0.5    && < 0.6
                  , xmonad         >= 0.13   && < 0.14
                  , xmonad-contrib >= 0.13   && < 0.14
-    hs-source-dirs: src
-    default-language: Haskell2010
 
 executable xmonad-ng
-    main-is: Main.hs
-    ghc-options: -Wall
+    main-is:          Main.hs
+    ghc-options:      -Wall
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+    other-extensions: DeriveDataTypeable
+                    , MultiParamTypeClasses
+                    , TypeSynonymInstances
+
+    other-modules: XMonad.Actions.FloatSnapSpaced
+                 , XMonad.Actions.PerConditionKeys
+                 , XMonad.Custom.Bindings
+                 , XMonad.Custom.Event
+                 , XMonad.Custom.Layout
+                 , XMonad.Custom.Log
+                 , XMonad.Custom.Manage
+                 , XMonad.Custom.Misc
+                 , XMonad.Custom.Navigation
+                 , XMonad.Custom.Projects
+                 , XMonad.Custom.Scratchpads
+                 , XMonad.Custom.Startup
+                 , XMonad.Custom.Theme
+                 , XMonad.Custom.Workspaces
+
     build-depends: X11            >= 1.8    && < 1.9
                  , base           >= 4.9    && < 4.10
                  , containers     >= 0.5    && < 0.6
@@ -42,5 +65,3 @@ executable xmonad-ng
                  , xmonad         >= 0.13   && < 0.14
                  , xmonad-contrib >= 0.13   && < 0.14
                  , xmonad-extras  >= 0.13.0 && < 0.14
-    hs-source-dirs: src
-    default-language: Haskell2010

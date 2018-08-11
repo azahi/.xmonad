@@ -8,9 +8,7 @@
 -- Stability   :  unstable
 -- Portability :  unportable
 --
--- Custom target for window navigation.
---
-------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 module XMonad.Custom.Navigation
     ( navigation2DConfig

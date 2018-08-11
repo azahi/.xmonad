@@ -8,9 +8,7 @@
 -- Stability   :  unstable
 -- Portability :  unportable
 --
--- Custom target for projects.
---
-------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 module XMonad.Custom.Projects
     ( projects

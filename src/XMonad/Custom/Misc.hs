@@ -10,9 +10,7 @@
 -- Stability   :  unstable
 -- Portability :  unportable
 --
--- Miscellaneous functions, data types and declarations used for 'XMonad.Custom'.
---
-------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 module XMonad.Custom.Misc
     ( Applications (..)

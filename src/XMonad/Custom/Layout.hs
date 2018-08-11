@@ -13,9 +13,7 @@
 -- Stability   :  unstable
 -- Portability :  unportable
 --
--- Custom target for layouts, sublayouts and layout transformers.
---
-------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 module XMonad.Custom.Layout
     ( layoutHook'

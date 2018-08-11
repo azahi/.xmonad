@@ -8,9 +8,7 @@
 -- Stability   :  unstable
 -- Portability :  unportable
 --
--- Custom target for keyboard/mouse bindings.
---
-------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 module XMonad.Custom.Bindings
     ( showKeyBindings

@@ -8,7 +8,7 @@
 -- Stability   :  unstable
 -- Portability :  unportable
 --
-------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 module XMonad.Custom.Startup
     ( startupHook'
@@ -41,7 +41,7 @@ addNETSupported x = withDisplay $ \d -> do
     n <- getAtom "_NET_SUPPORTED"
     a <- getAtom "ATOM"
     liftIO $ do
-        p <- (join . maybeToList) <$> getWindowProperty32 d n r
+        p <- join . maybeToList <$> getWindowProperty32 d n r
         when (fromIntegral x `notElem` p) $ changeProperty32 d r n a propModeAppend [fromIntegral x]
 
 addEWMHFullscreen :: X ()
@@ -51,8 +51,8 @@ addEWMHFullscreen = do
 
 startupHook' :: X ()
 startupHook' = do
-    spawnNamedPipe "/usr/bin/xmobar ~/.xmonad/xmobarrcTop.hs" "xmobarTop"
-    spawnNamedPipe "/usr/bin/xmobar ~/.xmonad/xmobarrcBot.hs" "xmobarBot"
+    spawnNamedPipe "/usr/bin/xmobar ~/work/xmonad-ng/xmobarrcTop.hs" "xmobarTop"
+    spawnNamedPipe "/usr/bin/xmobar ~/work/xmonad-ng/xmobarrcBot.hs" "xmobarBot"
     docksStartupHook
     addEWMHFullscreen
     setDefaultCursor xC_left_ptr
