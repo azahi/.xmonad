@@ -27,9 +27,9 @@ data Applications = Applications
 
 customApplications :: Applications
 customApplications = Applications
-    { term    = "/usr/bin/urxvtc"
-    , browser = "/usr/bin/qutebrowser"
-    , top     = "/usr/bin/htop"
-    , mixer   = "/usr/bin/alsamixer"
-    , notify  = "/usr/bin/notify-send"
+    { term    = "urxvtc"
+    , browser = "qutebrowser"
+    , top     = "htop"
+    , mixer   = "alsamixer"
+    , notify  = "notify-send"
     }

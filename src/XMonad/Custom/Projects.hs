@@ -27,7 +27,7 @@ projects =
 
     , Project { projectName      = "Emacs"
               , projectDirectory = "~/"
-              , projectStartHook = Just $ spawnOn "Emacs" "/usr/bin/emacsclient"
+              , projectStartHook = Just $ spawnOn "Emacs" "emacsclient"
               }
 
     , Project { projectName      = "WWW"

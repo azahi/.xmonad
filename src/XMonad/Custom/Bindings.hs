@@ -64,7 +64,7 @@ import           XMonad.Util.XSelection
 
 showKeyBindings :: [((KeyMask, KeySym), NamedAction)] -> NamedAction
 showKeyBindings a = addName "Show Keybindings" $ io $ do
-    p <- spawnPipe "/usr/bin/zenity --text-info" -- TOOD Find an application that doesn't rely on any toolkits
+    p <- spawnPipe "zenity --text-info" -- TOOD Find an application that doesn't rely on any toolkits
     hPutStr p $ unlines $ showKm a
     hClose p
     return ()
@@ -114,8 +114,7 @@ keyBindings c =
     let subKeys s ks = subtitle s:mkNamedKeymap c ks
     in
     subKeys "System"
-    [ ("M-q"   , addName "Restart XMonad"             $ spawn "/usr/bin/xmonad --restart")
-    , ("M-C-q" , addName "Recompile & restart XMonad" $ spawn "/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart")
+    [ ("M-q"   , addName "Restart XMonad"             $ spawn "xmonad-ng --restart")
     , ("M-S-q" , addName "Quit XMonad"                $ confirmPrompt hotPromptTheme "Quit XMonad?" $ io exitSuccess)
     , ("M-x"   , addName "Shell prompt"               $ shellPrompt promptTheme)
     , ("M-o"   , addName "Goto W prompt"              $ windowPrompt promptTheme Goto allWindows)
@@ -137,7 +136,7 @@ keyBindings c =
                                                                                          \xcast.sh --webm")
     , ("M-S-<Insert>"      , addName "Start recording screen as gif"             $ spawn "~/.xmonad/bin/\
                                                                                          \xcast.sh --gif")
-    , ("M-C-<Insert>"      , addName "Stop recording"                            $ spawn "/usr/bin/pkill ffmpeg")
+    , ("M-C-<Insert>"      , addName "Stop recording"                            $ spawn "pkill ffmpeg")
     , ("M-C-c"             , addName "Toggle compton on/off"                     $ spawn "~/.xmonad/bin/\
                                                                                          \toggle-compton.sh")
     , ("M-C-r"             , addName "Toggle redshift on/off"                    $ spawn "~/.xmonad/bin/\
@@ -153,10 +152,23 @@ keyBindings c =
     , ("<XF86AudioLowerVolume>" , addName "ALSA: Lower volume" $ void $ lowerVolume 5)
     , ("<XF86AudioRaiseVolume>" , addName "ALSA: Raise volume" $ void $ raiseVolume 5)
     , ("<XF86AudioPlay>"        , addName "MPD: Play/pause"    $ spawn "~/.xmonad/bin/mpc-play-pause.sh")
-    , ("<XF86AudioStop>"        , addName "MPD: Stop"          $ spawn "/usr/bin/mpc --no-status stop")
-    , ("<XF86AudioPrev>"        , addName "MPD: Previos track" $ spawn "/usr/bin/mpc --no-status prev")
-    , ("<XF86AudioNext>"        , addName "MPD: Next track"    $ spawn "/usr/bin/mpc --no-status next")
+    , ("<XF86AudioStop>"        , addName "MPD: Stop"          $ spawn "mpc --no-status stop")
+    , ("<XF86AudioPrev>"        , addName "MPD: Previos track" $ spawn "mpc --no-status prev")
+    , ("<XF86AudioNext>"        , addName "MPD: Next track"    $ spawn "mpc --no-status next")
     ]
+    ^++^
+    subKeys "Workspaces & Projects"
+    ( [ ("M-w"   , addName "Switch to project"     $ switchProjectPrompt  promptTheme)
+      , ("M-S-w" , addName "Shift to project"      $ shiftToProjectPrompt promptTheme)
+      , ("M-,"   , addName "Next non-empty WS"       nextNonEmptyWS)
+      , ("M-."   , addName "Previous non-empty WS"   prevNonEmptyWS)
+      , ("M-i"   , addName "Toggle last WS"        $ toggleWS' ["NSP"])
+      , ("M-`"   , addName "WS prompt"             $ workspacePrompt promptTheme $ windows . S.shift)
+      ]
+      ++ zipM "M-"     "View WS"      wsKeys [0 ..] (withNthWorkspace S.greedyView)
+      ++ zipM "M-S-"   "Move W to WS" wsKeys [0 ..] (withNthWorkspace S.shift)
+      ++ zipM "M-C-S-" "Copy W to WS" wsKeys [0 ..] (withNthWorkspace copy)
+    )
     ^++^
     subKeys "Spawnables"
     [ ("M-<Return>" , addName "Terminal"         $ spawn (CM.term CM.customApplications))
@@ -194,19 +206,6 @@ keyBindings c =
       ++ zipM' "M-"   "Navigate screen"        arrowKeys directions screenGo       True
       ++ zipM' "M-S-" "Move W to screen"       arrowKeys directions windowToScreen True
       ++ zipM' "M-C-" "Swap W to screen"       arrowKeys directions screenSwap     True
-    )
-    ^++^
-    subKeys "Workspaces & Projects"
-    ( [ ("M-w"   , addName "Switch to project"     $ switchProjectPrompt  promptTheme)
-      , ("M-S-w" , addName "Shift to project"      $ shiftToProjectPrompt promptTheme)
-      , ("M-,"   , addName "Next non-empty WS"       nextNonEmptyWS)
-      , ("M-."   , addName "Previous non-empty WS"   prevNonEmptyWS)
-      , ("M-i"   , addName "Toggle last WS"        $ toggleWS' ["NSP"])
-      , ("M-`"   , addName "WS prompt"             $ workspacePrompt promptTheme $ windows . S.shift)
-      ]
-      ++ zipM "M-"     "View WS"      wsKeys [0 ..] (withNthWorkspace S.greedyView)
-      ++ zipM "M-S-"   "Move W to WS" wsKeys [0 ..] (withNthWorkspace S.shift)
-      ++ zipM "M-C-S-" "Copy W to WS" wsKeys [0 ..] (withNthWorkspace copy)
     )
     ^++^
     subKeys "Layout Management"

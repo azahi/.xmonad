@@ -1,6 +1,0 @@
-resolver: lts-9.21
-packages:
-    - .
-extra-deps:
-    - primitive-0.6.4.0
-    - text-1.2.3.0
