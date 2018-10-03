@@ -46,25 +46,26 @@ instance UrgencyHook NotifyUrgencyHook where
         safeSpawn (Custom.notify Custom.customApplications) [show n, "workspace " ++ wrap "[" "]" i]
 
 main :: IO ()
-main = xmonad $ ewmh
-              $ fullscreenSupport
-              $ docks
-              $ withUrgencyHook NotifyUrgencyHook
-              $ withNavigation2DConfig Custom.navigation2DConfig
-              $ dynamicProjects Custom.projects
-              $ addDescrKeys' ((Custom.modMask', xK_F1), Custom.showKeyBindings) Custom.keyBindings
-              $ def { borderWidth        = Custom.border
-                    , workspaces         = Custom.workspaces' -- TODO save WS state
-                    , layoutHook         = Custom.layoutHook' -- TODO save layout state and floating W position
-                    , terminal           = Custom.term Custom.customApplications
-                    , normalBorderColor  = Custom.colorN
-                    , focusedBorderColor = Custom.colorF
-                    , modMask            = Custom.modMask'
-                    , logHook            = Custom.logHook'
-                    , startupHook        = Custom.startupHook'
-                    , mouseBindings      = Custom.mouseBindings'
-                    , manageHook         = Custom.manageHook'
-                    , handleEventHook    = Custom.handleEventHook'
-                    , focusFollowsMouse  = False
-                    , clickJustFocuses   = False
-                    }
+main = xmonad
+       $ ewmh
+       $ fullscreenSupport
+       $ docks
+       $ withUrgencyHook NotifyUrgencyHook
+       $ withNavigation2DConfig Custom.navigation2DConfig
+       $ dynamicProjects Custom.projects
+       $ addDescrKeys' ((Custom.modMask', xK_F1), Custom.showKeyBindings) Custom.keyBindings
+       $ def { borderWidth        = Custom.border
+             , workspaces         = Custom.workspaces' -- TODO save WS state
+             , layoutHook         = Custom.layoutHook' -- TODO save layout state and floating W position
+             , terminal           = Custom.term Custom.customApplications
+             , normalBorderColor  = Custom.colorN
+             , focusedBorderColor = Custom.colorF
+             , modMask            = Custom.modMask'
+             , logHook            = Custom.logHook'
+             , startupHook        = Custom.startupHook'
+             , mouseBindings      = Custom.mouseBindings'
+             , manageHook         = Custom.manageHook'
+             , handleEventHook    = Custom.handleEventHook'
+             , focusFollowsMouse  = False
+             , clickJustFocuses   = False
+             }

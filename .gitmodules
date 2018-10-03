@@ -1,0 +1,6 @@
+[submodule "vendor/xmonad"]
+	path = vendor/xmonad
+	url = https://github.com/azahi/xmonad
+[submodule "vendor/xmonad-contrib"]
+	path = vendor/xmonad-contrib
+	url = https://github.com/azahi/xmonad-contrib

@@ -1,0 +1,5 @@
+resolver: lts-12.11
+packages:
+    - .
+    - ./vendor/xmonad
+    - ./vendor/xmonad-contrib

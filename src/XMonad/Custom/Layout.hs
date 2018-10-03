@@ -40,23 +40,16 @@ import           XMonad.Layout.Tabbed
 import           XMonad.Layout.WindowNavigation
 
 applySpacing :: l a -> ModifiedLayout Spacing l a
-applySpacing = spacing gapBase
-
-applyGaps :: l a -> ModifiedLayout Gaps l a
-applyGaps = gaps [ (U, gapBase)
-                 , (D, gapBase)
-                 , (R, gapBase)
-                 , (L, gapBase)
-                 ]
+applySpacing = spacingRaw True (Border 12 12 12 12) True (Border 12 12 12 12) True
 
 data CustomTransformers = GAPS
                         deriving (Read, Show, Eq, Typeable)
 
 instance Transformer CustomTransformers Window where
-    transform GAPS x k = k (avoidStruts $ applyGaps $ applySpacing x) (const x)
+    transform GAPS x k = k (avoidStruts $ applySpacing x) (const x)
 
 layoutHook' = fullscreenFloat
-            $ lessBorders OnlyFloat
+            $ lessBorders OnlyLayoutFloat
             $ mkToggle (single NBFULL)
             $ avoidStruts
             $ mkToggle (single GAPS)

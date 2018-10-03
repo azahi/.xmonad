@@ -1,3 +1,5 @@
+{-# LANGUAGE LambdaCase #-}
+
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  XMonad.Custom.Bindings
@@ -34,7 +36,7 @@ import           XMonad.Actions.MessageFeedback
 import           XMonad.Actions.Navigation2D
 import           XMonad.Actions.PerConditionKeys
 import           XMonad.Actions.Promote
-import           XMonad.Actions.Volume
+--import           XMonad.Actions.Volume
 import           XMonad.Actions.WithAll
 import           XMonad.Custom.Layout
 import qualified XMonad.Custom.Misc                  as CM
@@ -86,16 +88,15 @@ zipM' :: [a] -> String -> [[a]] -> [t] -> (t -> t1 -> X ()) -> t1 -> [([a], Name
 zipM' m nm ks as f b = zipWith (\k d -> (m ++ k, addName nm $ f d b)) ks as
 
 tryMessageR_ :: (Message a, Message b) => a -> b -> X ()
-tryMessageR_ x y = sequence_ [tryMessage_ x y, refresh]
+tryMessageR_ x y = sequence_ [tryMessageWithNoRefreshToCurrent x y, refresh]
 
 xSelectionNotify :: MonadIO m => m ()
 xSelectionNotify = join $ io
-    $ (unsafeSpawn . (\x -> CM.notify CM.customApplications ++ " Clipboard " ++ wrap "\"\\\"" "\"\\\"" x)) <$> getSelection
+    $ unsafeSpawn . (\x -> CM.notify CM.customApplications ++ " Clipboard " ++ wrap "\"\\\"" "\"\\\"" x) <$> getSelection
 
 toggleCopyToAll :: X ()
-toggleCopyToAll = wsContainingCopies >>= \x -> case x of
-                                                   [] -> windows copyToAll
-                                                   _  -> killAllOtherCopies
+toggleCopyToAll = wsContainingCopies >>= \case [] -> windows copyToAll
+                                               _  -> killAllOtherCopies
 
 getSortByIndexNonSP :: X ([WindowSpace] -> [WindowSpace])
 getSortByIndexNonSP = (. namedScratchpadFilterOutWorkspace) <$> getSortByIndex
@@ -107,12 +108,10 @@ prevNonEmptyWS = findWorkspace getSortByIndexNonSP Prev HiddenNonEmptyWS 1 >>= \
 toggleFloat :: Window -> X ()
 toggleFloat w = windows (\s -> if M.member w (S.floating s)
                                then S.sink w s
-                                  else S.float w (S.RationalRect (1/2 - 1/4) (1/2 - 1/4) (1/2) (1/2)) s)
+                               else S.float w (S.RationalRect (1/2 - 1/4) (1/2 - 1/4) (1/2) (1/2)) s)
 
 keyBindings :: XConfig Layout -> [((KeyMask, KeySym), NamedAction)]
-keyBindings c =
-    let subKeys s ks = subtitle s:mkNamedKeymap c ks
-    in
+keyBindings c = let subKeys s ks = subtitle s:mkNamedKeymap c ks in
     subKeys "System"
     [ ("M-q"   , addName "Restart XMonad"             $ spawn "xmonad-ng --restart")
     , ("M-S-q" , addName "Quit XMonad"                $ confirmPrompt hotPromptTheme "Quit XMonad?" $ io exitSuccess)
@@ -148,10 +147,10 @@ keyBindings c =
     ]
     ^++^
     subKeys "Volume & Music"
-    [ ("<XF86AudioMute>"        , addName "ALSA: Mute"         $ void   toggleMute)
-    , ("<XF86AudioLowerVolume>" , addName "ALSA: Lower volume" $ void $ lowerVolume 5)
-    , ("<XF86AudioRaiseVolume>" , addName "ALSA: Raise volume" $ void $ raiseVolume 5)
-    , ("<XF86AudioPlay>"        , addName "MPD: Play/pause"    $ spawn "~/.xmonad/bin/mpc-play-pause.sh")
+ -- [ ("<XF86AudioMute>"        , addName "ALSA: Mute"         $ void   toggleMute)
+ -- , ("<XF86AudioLowerVolume>" , addName "ALSA: Lower volume" $ void $ lowerVolume 5)
+ -- , ("<XF86AudioRaiseVolume>" , addName "ALSA: Raise volume" $ void $ raiseVolume 5)
+    [ ("<XF86AudioPlay>"        , addName "MPD: Play/pause"    $ spawn "~/.xmonad/bin/mpc-play-pause.sh")
     , ("<XF86AudioStop>"        , addName "MPD: Stop"          $ spawn "mpc --no-status stop")
     , ("<XF86AudioPrev>"        , addName "MPD: Previos track" $ spawn "mpc --no-status prev")
     , ("<XF86AudioNext>"        , addName "MPD: Next track"    $ spawn "mpc --no-status next")
