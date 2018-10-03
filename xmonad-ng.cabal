@@ -24,9 +24,12 @@ library
 
     exposed-modules: XMonad.Actions.FloatSnapSpaced
                    , XMonad.Actions.PerConditionKeys
+                   , XMonad.Util.ALSA
 
-    build-depends: base           >= 4.11 && < 4.12
+    build-depends: alsa-mixer     >= 0.2  && < 0.3
+                 , base           >= 4.11 && < 4.12
                  , containers     >= 0.5  && < 0.6
+                 , mtl            >= 2.2  && < 2.3
                  , xmonad         >= 0.15 && < 0.16
                  , xmonad-contrib >= 0.15 && < 0.16
 
@@ -55,12 +58,15 @@ executable xmonad-ng
                  , XMonad.Custom.Startup
                  , XMonad.Custom.Theme
                  , XMonad.Custom.Workspaces
+                 , XMonad.Util.ALSA
 
     build-depends: X11            >= 1.9  && < 1.10
+                 , alsa-mixer     >= 0.2  && < 0.3
                  , base           >= 4.11 && < 4.12
                  , containers     >= 0.5  && < 0.6
                  , directory      >= 1.3  && < 1.4
                  , filepath       >= 1.4  && < 1.5
+                 , mtl            >= 2.2  && < 2.3
                  , text           >= 1.2  && < 1.3
                  , time           >= 1.8  && < 1.9
                  , xmonad         >= 0.15 && < 0.16

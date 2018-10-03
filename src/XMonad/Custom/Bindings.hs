@@ -36,7 +36,6 @@ import           XMonad.Actions.MessageFeedback
 import           XMonad.Actions.Navigation2D
 import           XMonad.Actions.PerConditionKeys
 import           XMonad.Actions.Promote
---import           XMonad.Actions.Volume
 import           XMonad.Actions.WithAll
 import           XMonad.Custom.Layout
 import qualified XMonad.Custom.Misc                  as CM
@@ -57,6 +56,7 @@ import           XMonad.Prompt.Shell
 import           XMonad.Prompt.Window
 import           XMonad.Prompt.Workspace
 import qualified XMonad.StackSet                     as S
+import           XMonad.Util.ALSA
 import           XMonad.Util.EZConfig
 import           XMonad.Util.NamedActions
 import           XMonad.Util.NamedScratchpad
@@ -147,10 +147,10 @@ keyBindings c = let subKeys s ks = subtitle s:mkNamedKeymap c ks in
     ]
     ^++^
     subKeys "Volume & Music"
- -- [ ("<XF86AudioMute>"        , addName "ALSA: Mute"         $ void   toggleMute)
- -- , ("<XF86AudioLowerVolume>" , addName "ALSA: Lower volume" $ void $ lowerVolume 5)
- -- , ("<XF86AudioRaiseVolume>" , addName "ALSA: Raise volume" $ void $ raiseVolume 5)
-    [ ("<XF86AudioPlay>"        , addName "MPD: Play/pause"    $ spawn "~/.xmonad/bin/mpc-play-pause.sh")
+    [ ("<XF86AudioMute>"        , addName "ALSA: Mute"         $ void   toggleMute)
+    , ("<XF86AudioLowerVolume>" , addName "ALSA: Lower volume" $ void $ lowerVolume 5)
+    , ("<XF86AudioRaiseVolume>" , addName "ALSA: Raise volume" $ void $ raiseVolume 5)
+    , ("<XF86AudioPlay>"        , addName "MPD: Play/pause"    $ spawn "~/.xmonad/bin/mpc-play-pause.sh")
     , ("<XF86AudioStop>"        , addName "MPD: Stop"          $ spawn "mpc --no-status stop")
     , ("<XF86AudioPrev>"        , addName "MPD: Previos track" $ spawn "mpc --no-status prev")
     , ("<XF86AudioNext>"        , addName "MPD: Next track"    $ spawn "mpc --no-status next")
@@ -238,7 +238,7 @@ mouseBindings' :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
 mouseBindings' XConfig {XMonad.modMask = m} = M.fromList
     [ ((m,               button1), \w -> focus w
                                          >> F.mouseWindow F.position w
-                                         >> ifClick (snapSpacedMagicMove gapBase  (Just 50) (Just 50) w)
+                                         >> ifClick (snapSpacedMagicMove gapFull  (Just 50) (Just 50) w)
                                          >> windows S.shiftMaster
       )
     , ((m .|. shiftMask, button1), \w -> focus w

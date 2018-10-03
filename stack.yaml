@@ -3,3 +3,5 @@ packages:
     - .
     - ./vendor/xmonad
     - ./vendor/xmonad-contrib
+extra-deps:
+    - alsa-mixer-0.2.0.3
