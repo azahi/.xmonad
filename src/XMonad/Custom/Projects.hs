@@ -16,7 +16,7 @@ module XMonad.Custom.Projects
 
 import           XMonad.Actions.DynamicProjects
 import           XMonad.Actions.SpawnOn
-import qualified XMonad.Custom.Misc             as CM
+import qualified XMonad.Custom.Misc             as C
 
 projects :: [Project]
 projects =
@@ -32,6 +32,6 @@ projects =
 
     , Project { projectName      = "WWW"
               , projectDirectory = "~/"
-              , projectStartHook = Just $ spawnOn "WWW" (CM.browser CM.customApplications)
+              , projectStartHook = Just $ spawnOn "WWW" (C.browser C.applications)
               }
     ]

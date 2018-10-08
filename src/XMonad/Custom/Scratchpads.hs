@@ -15,13 +15,13 @@ module XMonad.Custom.Scratchpads
     ) where
 
 import           XMonad.Core
-import qualified XMonad.Custom.Misc          as CM
+import           XMonad.Custom.Misc          as C
 import           XMonad.ManageHook
 import qualified XMonad.StackSet             as S
 import           XMonad.Util.NamedScratchpad
 
 spawnTerminalWith :: String -> String -> String
-spawnTerminalWith t c = CM.term CM.customApplications ++ " -title " ++ t ++ " -e " ++ c
+spawnTerminalWith t c = term applications ++ " -title " ++ t ++ " -e " ++ c
 
 floatingNSP :: ManageHook
 floatingNSP = customFloating $ S.RationalRect x y w h
@@ -34,19 +34,19 @@ floatingNSP = customFloating $ S.RationalRect x y w h
 scratchpads :: [NamedScratchpad]
 scratchpads =
     [ NS "console"
-         (spawnTerminalWith "NSPConsole" "~/.xmonad/bin/nsp-console.sh")
-         (title =? "NSPConsole")
-         floatingNSP
+      (spawnTerminalWith "NSPConsole" "~/.xmonad/bin/nsp-console.sh")
+      (title =? "NSPConsole")
+      floatingNSP
     , NS "volume"
-         (spawnTerminalWith "NSPVolume" (CM.mixer CM.customApplications))
-         (title =? "NSPVolume")
-         floatingNSP
+      (spawnTerminalWith "NSPVolume" (C.mixer C.applications))
+      (title =? "NSPVolume")
+      floatingNSP
     , NS "music"
-         (spawnTerminalWith "NSPMusic" "~/.bin/mp")
-         (title =? "NSPMusic")
-         floatingNSP
+      (spawnTerminalWith "NSPMusic" "~/.bin/mp")
+      (title =? "NSPMusic")
+      floatingNSP
     , NS "top"
-         (spawnTerminalWith "NSPTop" (CM.top CM.customApplications))
-         (title =? "NSPTop")
-         floatingNSP
+      (spawnTerminalWith "NSPTop" (C.top C.applications))
+      (title =? "NSPTop")
+      floatingNSP
     ]

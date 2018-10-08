@@ -11,10 +11,10 @@
 -----------------------------------------------------------------------------
 
 module XMonad.Custom.Manage
-    ( manageHook'
+    ( manageHook
     ) where
 
-import           XMonad
+import           XMonad                      hiding (manageHook)
 import           XMonad.Custom.Scratchpads
 import           XMonad.Hooks.InsertPosition
 import           XMonad.Hooks.ManageDocks
@@ -37,20 +37,20 @@ composeActions =
     , className =? "xterm"                                      -?> tileBelow
     , isDialog                                                  -?> doCenterFloat
     , isFullscreen                                              -?> doFullFloat
-    , pure True                                                 -?> normalTile
+    , pure True                                                 -?> tileNormal
     , stringProperty "WM_WINDOW_ROLE" =? "pop-up"               -?> doCenterFloat
     , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" -?> doCenterFloat
     , transience
     ]
     where
-        normalTile       = insertPosition Above Newer
+        tileNormal       = insertPosition Above Newer
         tileBelow        = insertPosition Below Newer
         tileBelowNoFocus = insertPosition Below Older
 
 
-manageHook' :: ManageHook
-manageHook' = mconcat [ manageDocks
-                      , fullscreenManageHook
-                      , namedScratchpadManageHook scratchpads
-                      , composeOne composeActions
-                      ]
+manageHook :: ManageHook
+manageHook = mconcat [ manageDocks
+                     , fullscreenManageHook
+                     , namedScratchpadManageHook scratchpads
+                     , composeOne composeActions
+                     ]

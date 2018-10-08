@@ -16,17 +16,16 @@
 -----------------------------------------------------------------------------
 
 module XMonad.Custom.Layout
-    ( layoutHook'
+    ( layoutHook
     , CustomTransformers (..)
     ) where
 
-import           XMonad
+import           XMonad                              hiding (layoutHook)
 import           XMonad.Custom.Theme
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Layout.Accordion
 import           XMonad.Layout.BinarySpacePartition
 import           XMonad.Layout.Fullscreen
-import           XMonad.Layout.Gaps
 import           XMonad.Layout.Hidden
 import           XMonad.Layout.LayoutModifier
 import           XMonad.Layout.MultiToggle
@@ -48,15 +47,15 @@ data CustomTransformers = GAPS
 instance Transformer CustomTransformers Window where
     transform GAPS x k = k (avoidStruts $ applySpacing x) (const x)
 
-layoutHook' = fullscreenFloat
-            $ lessBorders OnlyLayoutFloat
-            $ mkToggle (single NBFULL)
-            $ avoidStruts
-            $ mkToggle (single GAPS)
-            $ mkToggle (single REFLECTX)
-            $ mkToggle (single REFLECTY)
-            $ windowNavigation
-            $ addTabs shrinkText tabTheme
-            $ hiddenWindows
-            $ subLayout [] (Simplest ||| Accordion)
-              emptyBSP
+layoutHook = fullscreenFloat
+             $ lessBorders OnlyLayoutFloat
+             $ mkToggle (single NBFULL)
+             $ avoidStruts
+             $ mkToggle (single GAPS)
+             $ mkToggle (single REFLECTX)
+             $ mkToggle (single REFLECTY)
+             $ windowNavigation
+             $ addTabs shrinkText tabTheme
+             $ hiddenWindows
+             $ subLayout [] (Simplest ||| Accordion)
+             emptyBSP

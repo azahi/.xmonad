@@ -11,15 +11,14 @@
 -----------------------------------------------------------------------------
 
 module XMonad.Custom.Workspaces
-    ( workspaces'
+    ( workspaces
     ) where
 
 import           XMonad.Actions.DynamicProjects
-import           XMonad.Core
-import           XMonad.Custom.Misc
+import           XMonad.Core                    hiding (workspaces)
 
-workspaces' :: [WorkspaceId]
-workspaces' = map show [1..9 :: Int]
+workspaces :: [WorkspaceId]
+workspaces = map show [1..9 :: Int]
 
 projects :: [Project]
 projects =

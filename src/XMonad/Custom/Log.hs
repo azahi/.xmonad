@@ -16,11 +16,11 @@
 -----------------------------------------------------------------------------
 
 module XMonad.Custom.Log
-    ( logHook'
+    ( logHook
     ) where
 
 import           System.IO
-import           XMonad
+import           XMonad                             hiding (logHook)
 import           XMonad.Actions.CopyWindow
 import           XMonad.Custom.Theme
 import           XMonad.Hooks.CurrentWorkspaceOnTop
@@ -66,8 +66,8 @@ botBarPP = topBarPP
 safePrintToPipe :: Maybe Handle -> String -> IO ()
 safePrintToPipe = maybe (\_ -> return ()) hPutStrLn
 
-logHook' :: X ()
-logHook' = do
+logHook :: X ()
+logHook = do
     currentWorkspaceOnTop
     ewmhDesktopsLogHook
     t <- getNamedPipe "xmobarTop"

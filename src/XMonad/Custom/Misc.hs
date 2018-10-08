@@ -14,7 +14,7 @@
 
 module XMonad.Custom.Misc
     ( Applications (..)
-    , customApplications
+    , applications
     ) where
 
 data Applications = Applications
@@ -25,8 +25,8 @@ data Applications = Applications
     , notify  :: !String
     } deriving (Eq, Show)
 
-customApplications :: Applications
-customApplications = Applications
+applications :: Applications
+applications = Applications
     { term    = "urxvtc"
     , browser = "qutebrowser"
     , top     = "htop"

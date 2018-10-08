@@ -11,13 +11,13 @@
 -----------------------------------------------------------------------------
 
 module XMonad.Custom.Navigation
-    ( navigation2DConfig
+    ( navigation
     ) where
 
 import           XMonad.Actions.Navigation2D
 
-navigation2DConfig :: Navigation2DConfig
-navigation2DConfig = def
+navigation :: Navigation2DConfig
+navigation = def
     { defaultTiledNavigation = hybridOf sideNavigation centerNavigation
     , floatNavigation        = hybridOf lineNavigation centerNavigation
     , layoutNavigation       = [("Full", centerNavigation)]

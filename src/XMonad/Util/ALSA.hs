@@ -32,7 +32,6 @@ import           Control.Monad
 import           Control.Monad.Trans
 import           Data.Maybe
 import           Sound.ALSA.Mixer
-import           XMonad.Core
 
 toggleMute          :: MonadIO m => m Bool
 raiseVolume         :: MonadIO m => Double -> m Double

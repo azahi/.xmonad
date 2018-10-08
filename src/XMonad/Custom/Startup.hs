@@ -11,12 +11,12 @@
 -----------------------------------------------------------------------------
 
 module XMonad.Custom.Startup
-    ( startupHook'
+    ( startupHook
     ) where
 
 import           Control.Monad
 import           Data.Maybe
-import           XMonad
+import           XMonad                     hiding (startupHook)
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.SetWMName
 import           XMonad.Util.Cursor
@@ -49,8 +49,8 @@ addEWMHFullscreen = do
     s <- mapM getAtom atomsToFullscreen
     mapM_ addNETSupported s
 
-startupHook' :: X ()
-startupHook' = do
+startupHook :: X ()
+startupHook = do
     spawnNamedPipe "xmobar ~/.xmonad/xmobarrcTop.hs" "xmobarTop"
     spawnNamedPipe "xmobar ~/.xmonad/xmobarrcBot.hs" "xmobarBot"
     docksStartupHook
