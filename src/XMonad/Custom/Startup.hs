@@ -51,8 +51,8 @@ addEWMHFullscreen = do
 
 startupHook :: X ()
 startupHook = do
-    spawnNamedPipe "xmobar ~/.xmonad/xmobarrcTop.hs" "xmobarTop"
-    spawnNamedPipe "xmobar ~/.xmonad/xmobarrcBot.hs" "xmobarBot"
+    spawnNamedPipe "xmobar ~/.xmonad/xmobarrc/top.hs" "xmobarTop"
+    spawnNamedPipe "xmobar ~/.xmonad/xmobarrc/bot.hs" "xmobarBot"
     docksStartupHook
     addEWMHFullscreen
     setDefaultCursor xC_left_ptr

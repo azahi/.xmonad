@@ -50,7 +50,6 @@ import           XMonad.Layout.Reflect
 import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.SubLayouts
 import           XMonad.Prompt.ConfirmPrompt
-import           XMonad.Prompt.Pass
 import           XMonad.Prompt.Shell
 import           XMonad.Prompt.Window
 import           XMonad.Prompt.Workspace
@@ -133,17 +132,17 @@ keysBase _ =
 keysSystem :: XConfig Layout -> [(String, X ())]
 keysSystem _ =
     [ ("M-C-g"             , return ())
-    , ("<XF86ScreenSaver>" , spawn "~/.xmonad/bin/screenlock.sh")
+    , ("<XF86ScreenSaver>" , spawn "~/.xmonad/scripts/screenlock.sh")
     -- , ("M-S-c"             , xSelectionNotify)
-    , ("M-<Print>"         , spawn "~/.xmonad/bin/xshot-upload.sh")
-    , ("M-S-<Print>"       , spawn "~/.xmonad/bin/xshot-select-upload.sh")
-    , ("M-<Insert>"        , spawn "~/.xmonad/bin/xcast.sh --webm")
-    , ("M-S-<Insert>"      , spawn "~/.xmonad/bin/xcast.sh --gif")
+    , ("M-<Print>"         , spawn "~/.xmonad/scripts/xshot-upload.sh")
+    , ("M-S-<Print>"       , spawn "~/.xmonad/scripts/xshot-select-upload.sh")
+    , ("M-<Insert>"        , spawn "~/.xmonad/scripts/xcast.sh --webm")
+    , ("M-S-<Insert>"      , spawn "~/.xmonad/scripts/xcast.sh --gif")
     , ("M-C-<Insert>"      , spawn "pkill ffmpeg")
-    , ("M-C-c"             , spawn "~/.xmonad/bin/toggle-compton.sh")
-    , ("M-C-r"             , spawn "~/.xmonad/bin/toggle-redshift.sh")
-    , ("M-C-p"             , spawn "~/.xmonad/bin/toggle-touchpad.sh")
-    , ("M-C-t"             , spawn "~/.xmonad/bin/toggle-trackpoint.sh")
+    , ("M-C-c"             , spawn "~/.xmonad/scripts/toggle-compton.sh")
+    , ("M-C-r"             , spawn "~/.xmonad/scripts/toggle-redshift.sh")
+    , ("M-C-p"             , spawn "~/.xmonad/scripts/toggle-touchpad.sh")
+    , ("M-C-t"             , spawn "~/.xmonad/scripts/toggle-trackpoint.sh")
     ]
 
 keysMedia :: XConfig Layout -> [(String, X ())]
@@ -151,7 +150,7 @@ keysMedia _ =
     [ ("<XF86AudioMute>"        , void   toggleMute)
     , ("<XF86AudioLowerVolume>" , void $ lowerVolume 5)
     , ("<XF86AudioRaiseVolume>" , void $ raiseVolume 5)
-    , ("<XF86AudioPlay>"        , spawn "~/.xmonad/bin/mpc-play-pause.sh")
+    , ("<XF86AudioPlay>"        , spawn "~/.xmonad/scripts/mpc-play-pause.sh")
     , ("<XF86AudioStop>"        , spawn "mpc --no-status stop")
     , ("<XF86AudioPrev>"        , spawn "mpc --no-status prev")
     , ("<XF86AudioNext>"        , spawn "mpc --no-status next")
@@ -159,7 +158,7 @@ keysMedia _ =
 
 keysWorkspaces :: XConfig Layout -> [(String, X ())]
 keysWorkspaces _ =
-    [ ("M-p"   , switchProjectPrompt  promptTheme)
+    [ ("M-S-o" , switchProjectPrompt  promptTheme)
     , ("M-S-p" , shiftToProjectPrompt promptTheme)
     , ("M-,"   , nextNonEmptyWS)
     , ("M-."   , prevNonEmptyWS)
@@ -174,7 +173,6 @@ keysSpawnables :: XConfig Layout -> [(String, X ())]
 keysSpawnables _ =
     [ ("M-<Return>" , spawn (C.term C.applications))
     , ("M-b"        , spawn (C.browser C.applications))
-    , ("M-C-p"      , passPrompt promptTheme)
     , ("M-c"        , namedScratchpadAction scratchpads "console")
     , ("M-m"        , namedScratchpadAction scratchpads "music")
     , ("M-t"        , namedScratchpadAction scratchpads "top")

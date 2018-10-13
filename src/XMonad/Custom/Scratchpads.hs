@@ -34,7 +34,7 @@ floatingNSP = customFloating $ S.RationalRect x y w h
 scratchpads :: [NamedScratchpad]
 scratchpads =
     [ NS "console"
-      (spawnTerminalWith "NSPConsole" "~/.xmonad/bin/nsp-console.sh")
+      (spawnTerminalWith "NSPConsole" "~/.xmonad/scripts/nsp-console.sh")
       (title =? "NSPConsole")
       floatingNSP
     , NS "volume"
@@ -42,7 +42,7 @@ scratchpads =
       (title =? "NSPVolume")
       floatingNSP
     , NS "music"
-      (spawnTerminalWith "NSPMusic" "~/.bin/mp")
+      (spawnTerminalWith "NSPMusic" "mp")
       (title =? "NSPMusic")
       floatingNSP
     , NS "top"

@@ -11,6 +11,7 @@ Config { font = "xft:lucy tewi:style=Regular:pixelsize=11,Efont Biwidth:pixelsiz
                            , height = 24
                            }
        , textOffset = 16
+       , textOffsets = [16, -1]
        , iconOffset = -1
        , lowerOnStart = True
        , hideOnStart = False
@@ -32,11 +33,11 @@ Config { font = "xft:lucy tewi:style=Regular:pixelsize=11,Efont Biwidth:pixelsiz
                     , Run Memory [ "-t", "<fn=1>\57384</fn><usedratio>%" ] 10
                     , Run ThermalZone 0 ["-t","<fn=1>\57371</fn><temp>°C"] 10
                     , Run ThermalZone 1 ["-t","<temp>°C"] 10
-                    , Run Wireless "wlp3s0" [ "-t", "<fn=1>\57882</fn><essid> @ <quality>%" ] 10
+                    , Run Wireless "wlp3s0" [ "-t", "<fn=1>\57775</fn><essid> @ <quality>%" ] 10
                     , Run DynNetwork [ "-t", "<fn=1>\57660</fn><rx> / <fn=1>\57659</fn><tx> kbps" ] 10
-                    , Run Kbd [ ("us", "<fn=1>\57967</fn>English / <fn=1>\57898</fn>")
-                              , ("ru", "<fn=1>\57967</fn>Russian / <fn=1>\57898</fn>")]
-                    , Run Com "/home/free/.xmonad/bin/xmobar/fcitx.sh" [] "fcitx" 3
+                    , Run Kbd [ ("us", "English / ")
+                              , ("ru", "Russian / ")]
+                    , Run Com "/home/free/.xmonad/scripts/xmobar/fcitx.sh" [] "fcitx" 3
                     , Run Locks
                     , Run MPD [ "-t", "<fn=1><statei></fn><artist> - <title>"
                               , "--"

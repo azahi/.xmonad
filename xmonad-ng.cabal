@@ -17,7 +17,8 @@ source-repository head
     type:     git
     location: https://github.com/azahi/xmonad-ng
 
-library
+executable xmonad-ng
+    main-is:          Main.hs
     ghc-options:      -Wall
     hs-source-dirs:   src
     default-language: Haskell2010
@@ -27,21 +28,21 @@ library
                     , MultiParamTypeClasses
                     , TypeSynonymInstances
 
-    exposed-modules: XMonad.Actions.FloatSnapSpaced
-                   , XMonad.Actions.PerConditionKeys
-                   , XMonad.Custom.Bindings
-                   , XMonad.Custom.Event
-                   , XMonad.Custom.Layout
-                   , XMonad.Custom.Log
-                   , XMonad.Custom.Manage
-                   , XMonad.Custom.Misc
-                   , XMonad.Custom.Navigation
-                   , XMonad.Custom.Projects
-                   , XMonad.Custom.Scratchpads
-                   , XMonad.Custom.Startup
-                   , XMonad.Custom.Theme
-                   , XMonad.Custom.Workspaces
-                   , XMonad.Util.ALSA
+    other-modules: XMonad.Actions.FloatSnapSpaced
+                 , XMonad.Actions.PerConditionKeys
+                 , XMonad.Custom.Bindings
+                 , XMonad.Custom.Event
+                 , XMonad.Custom.Layout
+                 , XMonad.Custom.Log
+                 , XMonad.Custom.Manage
+                 , XMonad.Custom.Misc
+                 , XMonad.Custom.Navigation
+                 , XMonad.Custom.Projects
+                 , XMonad.Custom.Scratchpads
+                 , XMonad.Custom.Startup
+                 , XMonad.Custom.Theme
+                 , XMonad.Custom.Workspaces
+                 , XMonad.Util.ALSA
 
     build-depends: X11            >= 1.9  && < 1.10
                  , alsa-mixer     >= 0.2  && < 0.3
@@ -54,41 +55,3 @@ library
                  , time           >= 1.8  && < 1.9
                  , xmonad         >= 0.15 && < 0.16
                  , xmonad-contrib >= 0.15 && < 0.16
-
-executable xmonad-ng
-    main-is:          Main.hs
-    ghc-options:      -Wall
-    hs-source-dirs:   src
-    default-language: Haskell2010
-
-    build-depends: X11            >= 1.9  && < 1.10
-                 , alsa-mixer     >= 0.2  && < 0.3
-                 , base           >= 4.11 && < 4.12
-                 , containers     >= 0.5  && < 0.6
-                 , directory      >= 1.3  && < 1.4
-                 , filepath       >= 1.4  && < 1.5
-                 , mtl            >= 2.2  && < 2.3
-                 , text           >= 1.2  && < 1.3
-                 , time           >= 1.8  && < 1.9
-                 , xmonad         >= 0.15 && < 0.16
-                 , xmonad-contrib >= 0.15 && < 0.16
-                 , xmonad-ng
-
-executable xmonad-ng-test
-    main-is:          Test.hs
-    ghc-options:      -Wall
-    hs-source-dirs:   src
-    default-language: Haskell2010
-
-    build-depends: X11            >= 1.9  && < 1.10
-                 , alsa-mixer     >= 0.2  && < 0.3
-                 , base           >= 4.11 && < 4.12
-                 , containers     >= 0.5  && < 0.6
-                 , directory      >= 1.3  && < 1.4
-                 , filepath       >= 1.4  && < 1.5
-                 , mtl            >= 2.2  && < 2.3
-                 , text           >= 1.2  && < 1.3
-                 , time           >= 1.8  && < 1.9
-                 , xmonad         >= 0.15 && < 0.16
-                 , xmonad-contrib >= 0.15 && < 0.16
-                 , xmonad-ng

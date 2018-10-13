@@ -44,9 +44,7 @@ topBarPP = def
     , ppWsSep           = " "
     , ppTitle           = xmobarColor white1 "" . shorten 50
     , ppTitleSanitize   = xmobarStrip
-    , ppLayout          = xmobarColor white1 "" . \case "Spacing 12 Tabbed Hidden BSP" -> "Omni.Gaps"
-                                                        "Tabbed Hidden BSP"            -> "Omni"
-                                                        _                              -> "Misc"
+    , ppLayout          = xmobarColor white1 ""
     , ppOrder           = id
     , ppSort            = (namedScratchpadFilterOutWorkspace .) <$> getSortByIndex
     , ppExtras          = []

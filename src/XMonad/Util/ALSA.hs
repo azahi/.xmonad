@@ -1,5 +1,17 @@
 {-# LANGUAGE CPP #-}
 
+----------------------------------------------------------------------------
+-- |
+-- Module       : XMonad.Util.ALSA
+-- Copyright    : (c) daniel@wagner-home.com
+-- License      : BSD3-style (see LICENSE)
+--
+-- Maintainer   : azahi@teknik.io
+-- Stability    : unstable
+-- Portability  : unportable
+--
+----------------------------------------------------------------------------
+
 module XMonad.Util.ALSA
     ( toggleMute
     , raiseVolume

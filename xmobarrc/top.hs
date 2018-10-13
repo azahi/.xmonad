@@ -10,7 +10,8 @@ Config { font = "xft:lucy tewi:style=Regular:pixelsize=11,Efont Biwidth:pixelsiz
                            , width = 1600
                            , height = 24
                            }
-       , textOffset = 16
+       , textOffset = -1
+       , textOffsets = [-1, -1]
        , iconOffset = -1
        , lowerOnStart = True
        , hideOnStart = False
