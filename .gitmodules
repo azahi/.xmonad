@@ -4,3 +4,9 @@
 [submodule "vendor/xmonad-contrib"]
 	path = vendor/xmonad-contrib
 	url = https://github.com/azahi/xmonad-contrib
+[submodule "vendor/alsa-mixer"]
+	path = vendor/alsa-mixer
+	url = https://github.com/azahi/alsa-mixer
+[submodule "vendor/X11"]
+	path = vendor/X11
+	url = https://github.com/azahi/X11
