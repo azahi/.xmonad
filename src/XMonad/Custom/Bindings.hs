@@ -122,8 +122,8 @@ rawKeys c = withUpdatePointer $ concatMap ($ c) keymaps where
 keysBase :: XConfig Layout -> [(String, X ())]
 keysBase _ =
     [ ("M-S-q" , confirmPrompt hotPromptTheme "Quit XMonad?" $ io exitSuccess)
-    -- [ ("M-q"   $ spawn "xmonad-ng --restart")
-    -- , ("M-C-q" $ spawn "xmonad-ng --recompile && xmonad-ng --restart"')
+    , ("M-q"   , spawn "xmonad --restart")
+    , ("M-C-q" , spawn "xmonad --recompile && xmonad --restart")
     , ("M-x"   , shellPrompt promptTheme)
     , ("M-w"   , windowPrompt promptTheme Goto  allWindows)
     , ("M-S-w" , windowPrompt promptTheme Bring allWindows)

@@ -18,18 +18,20 @@ module XMonad.Custom.Misc
     ) where
 
 data Applications = Applications
-    { term    :: !String
-    , browser :: !String
-    , top     :: !String
+    { browser :: !String
     , mixer   :: !String
     , notify  :: !String
+    , player  :: !String
+    , term    :: !String
+    , top     :: !String
     } deriving (Eq, Show)
 
 applications :: Applications
 applications = Applications
-    { term    = "urxvtc"
-    , browser = "qutebrowser"
-    , top     = "htop"
+    { browser = "qutebrowser"
     , mixer   = "alsamixer"
     , notify  = "notify-send"
+    , player  = "ncmpcpp"
+    , term    = "urxvtc"
+    , top     = "htop"
     }

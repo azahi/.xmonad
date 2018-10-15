@@ -42,7 +42,7 @@ scratchpads =
       (title =? "NSPVolume")
       floatingNSP
     , NS "music"
-      (spawnTerminalWith "NSPMusic" "mp")
+      (spawnTerminalWith "NSPMusic" (C.player C.applications))
       (title =? "NSPMusic")
       floatingNSP
     , NS "top"
