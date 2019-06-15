@@ -54,7 +54,6 @@ import           XMonad.Prompt.Shell
 import           XMonad.Prompt.Window
 import           XMonad.Prompt.Workspace
 import qualified XMonad.StackSet                     as S
-import           XMonad.Util.ALSA
 import           XMonad.Util.EZConfig
 import           XMonad.Util.NamedScratchpad
 import           XMonad.Util.WorkspaceCompare
@@ -147,10 +146,11 @@ keysSystem _ =
 
 keysMedia :: XConfig Layout -> [(String, X ())]
 keysMedia _ =
-    [ ("<XF86AudioMute>"        , void   toggleMute)
-    , ("<XF86AudioLowerVolume>" , void $ lowerVolume 5)
-    , ("<XF86AudioRaiseVolume>" , void $ raiseVolume 5)
-    , ("<XF86AudioPlay>"        , spawn "~/.xmonad/scripts/mpc-play-pause.sh")
+    [
+ -- , ("<XF86AudioMute>"        , void   toggleMute)
+ -- , ("<XF86AudioLowerVolume>" , void $ lowerVolume 5)
+ -- , ("<XF86AudioRaiseVolume>" , void $ raiseVolume 5)
+      ("<XF86AudioPlay>"        , spawn "~/.xmonad/scripts/mpc-play-pause.sh")
     , ("<XF86AudioStop>"        , spawn "mpc --no-status stop")
     , ("<XF86AudioPrev>"        , spawn "mpc --no-status prev")
     , ("<XF86AudioNext>"        , spawn "mpc --no-status next")

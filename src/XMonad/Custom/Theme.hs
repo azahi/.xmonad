@@ -46,7 +46,7 @@ import           XMonad.Layout.Decoration
 import qualified XMonad.Prompt            as P
 
 font :: String
-font = "xft:lucy tewi:style=Regular:size=8" -- TODO CJKのフォールバックフォントを追加する
+font = "xft:tewi:style=Regular:size=8" -- TODO CJKのフォールバックフォントを追加する
 
 black1, black2 :: String -- TODO get variables from Xresources
 (black1, black2) =
