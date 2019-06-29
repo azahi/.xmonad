@@ -26,30 +26,15 @@ import qualified XMonad.Custom.Projects         as C
 import qualified XMonad.Custom.Startup          as C
 import qualified XMonad.Custom.Theme            as C
 import qualified XMonad.Custom.Workspaces       as C
-import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageDocks
-import           XMonad.Hooks.UrgencyHook
 import           XMonad.Layout.Fullscreen
-import qualified XMonad.StackSet                as S
-import           XMonad.Util.NamedWindows
-import           XMonad.Util.Run
-
-data NotifyUrgencyHook = NotifyUrgencyHook
-                       deriving (Read, Show)
-
-instance UrgencyHook NotifyUrgencyHook where
-    urgencyHook NotifyUrgencyHook w = do
-        n      <- getName w
-        Just i <- S.findTag w <$> gets windowset
-        safeSpawn (C.notify C.applications) [show n, "workspace " ++ wrap "[" "]" i]
 
 main :: IO ()
 main = xmonad
        $ ewmh
        $ fullscreenSupport
        $ docks
-       $ withUrgencyHook NotifyUrgencyHook
        $ withNavigation2DConfig C.navigation
        $ dynamicProjects C.projects
        $ def { borderWidth        = C.border

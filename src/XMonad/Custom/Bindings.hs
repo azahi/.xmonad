@@ -19,7 +19,6 @@ module XMonad.Custom.Bindings
     , mouseBindings
     ) where
 
-import           Control.Monad
 import qualified Data.Map                            as M
 import           System.Exit
 import           XMonad                              hiding (keys, modMask,
@@ -77,9 +76,6 @@ zipKeys' m ks as f b = zipWith (\k d -> (m ++ k, f d b)) ks as
 tryMessageR_ :: (Message a, Message b) => a -> b -> X ()
 tryMessageR_ x y = sequence_ [tryMessageWithNoRefreshToCurrent x y, refresh]
 
--- xSelectionNotify :: MonadIO m => m ()
--- xSelectionNotify = join $ io
---     $ unsafeSpawn . (\x -> C.notify C.applications ++ " Clipboard " ++ wrap "\"\\\"" "\"\\\"" x) <$> getSelection
 
 toggleCopyToAll :: X ()
 toggleCopyToAll = wsContainingCopies >>= \case [] -> windows copyToAll
@@ -132,7 +128,6 @@ keysSystem :: XConfig Layout -> [(String, X ())]
 keysSystem _ =
     [ ("M-C-g"             , return ())
     , ("<XF86ScreenSaver>" , spawn "~/.xmonad/scripts/screenlock.sh")
-    -- , ("M-S-c"             , xSelectionNotify)
     , ("M-<Print>"         , spawn "~/.xmonad/scripts/xshot-upload.sh")
     , ("M-S-<Print>"       , spawn "~/.xmonad/scripts/xshot-select-upload.sh")
     , ("M-<Insert>"        , spawn "~/.xmonad/scripts/xcast.sh --webm")
@@ -146,11 +141,10 @@ keysSystem _ =
 
 keysMedia :: XConfig Layout -> [(String, X ())]
 keysMedia _ =
-    [
- -- , ("<XF86AudioMute>"        , void   toggleMute)
- -- , ("<XF86AudioLowerVolume>" , void $ lowerVolume 5)
- -- , ("<XF86AudioRaiseVolume>" , void $ raiseVolume 5)
-      ("<XF86AudioPlay>"        , spawn "~/.xmonad/scripts/mpc-play-pause.sh")
+    [ ("<XF86AudioMute>"        , spawn "amixer set Master toggle")
+    , ("<XF86AudioLowerVolume>" , spawn "amixer set Master 5-")
+    , ("<XF86AudioRaiseVolume>" , spawn "amixer set Master 5+")
+    , ("<XF86AudioPlay>"        , spawn "~/.xmonad/scripts/mpc-play-pause.sh")
     , ("<XF86AudioStop>"        , spawn "mpc --no-status stop")
     , ("<XF86AudioPrev>"        , spawn "mpc --no-status prev")
     , ("<XF86AudioNext>"        , spawn "mpc --no-status next")

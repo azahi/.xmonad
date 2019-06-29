@@ -44,6 +44,7 @@ import           Data.List
 import           Graphics.X11.Xlib.Types
 import           XMonad.Layout.Decoration
 import qualified XMonad.Prompt            as P
+import Data.Ratio
 
 font :: String
 font = "xft:tewi:style=Regular:size=8" -- TODO CJKのフォールバックフォントを追加する
@@ -92,7 +93,7 @@ colorN = black2
 colorF = white2
 
 gapBase, gapFull :: Int
-gapBase = 12
+gapBase = 6
 gapFull = gapBase * 2
 
 height, border :: Dimension
@@ -123,9 +124,13 @@ promptTheme = def
     , P.bgHLight          = black2
     , P.borderColor       = white2
     , P.promptBorderWidth = border
-    , P.position          = P.Bottom
+    , P.position          = P.CenteredAt { P.xpCenterY = 3 % 10
+                                         , P.xpWidth   = 9 % 10
+                                         }
     , P.height            = height
+    , P.maxComplRows      = Just 5
     , P.searchPredicate   = isInfixOf `on` map toLower
+    , P.alwaysHighlight   = True
     }
 hotPromptTheme = promptTheme
     { P.bgColor           = black2

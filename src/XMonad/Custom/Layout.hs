@@ -39,7 +39,7 @@ import           XMonad.Layout.Tabbed
 import           XMonad.Layout.WindowNavigation
 
 applySpacing :: l a -> ModifiedLayout Spacing l a
-applySpacing = spacingRaw True (Border 12 12 12 12) True (Border 12 12 12 12) True
+applySpacing = spacingRaw False (Border 6 6 6 6) True (Border 6 6 6 6) True
 
 data CustomTransformers = GAPS
                         deriving (Read, Show, Eq, Typeable)
@@ -51,7 +51,8 @@ layoutHook = fullscreenFloat
              $ lessBorders OnlyLayoutFloat
              $ mkToggle (single NBFULL)
              $ avoidStruts
-             $ mkToggle (single GAPS)
+             $ applySpacing
+          -- $ mkToggle (single GAPS)
              $ mkToggle (single REFLECTX)
              $ mkToggle (single REFLECTY)
              $ windowNavigation

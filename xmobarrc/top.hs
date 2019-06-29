@@ -1,17 +1,17 @@
-Config { font = "xft:tewi:style=Regular:pixelsize=11,Efont Biwidth:pixelsize=12,Misc Fixed Wide:size=8"
+Config { font = "xft:tewi:style=Regular:pixelsize=11,Biwidth:pixelsize=12"
        , additionalFonts = [ "xft:Siji:style=Regular"
                            , "xft:tewi:style=Bold:pixelsize=11"
                            ]
        , bgColor = "#0b0806"
        , fgColor = "#a19782"
        , alpha = 255
-       , position = Static { xpos = 0
-                           , ypos = 0
-                           , width = 1600
+       , position = Static { xpos = 12
+                           , ypos = 12
+                           , width = 1576
                            , height = 24
                            }
-       , textOffset = -1
-       , textOffsets = [-1, -1]
+       , textOffset = 15
+       , textOffsets = [15, 15]
        , iconOffset = -1
        , lowerOnStart = True
        , hideOnStart = False
@@ -37,5 +37,5 @@ Config { font = "xft:tewi:style=Regular:pixelsize=11,Efont Biwidth:pixelsize=12,
                     \%UUWW%   %date%\
                     \ "
        }
-   
+
 -- vim:filetype=haskell:expandtab:tabstop=4:shiftwidth=4

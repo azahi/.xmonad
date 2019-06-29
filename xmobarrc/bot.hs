@@ -1,17 +1,17 @@
-Config { font = "xft:tewi:style=Regular:pixelsize=11,Efont Biwidth:pixelsize=12,Misc Fixed Wide:size=8"
+Config { font = "xft:tewi:style=Regular:pixelsize=11,Biwidth:pixelsize=12"
        , additionalFonts = [ "xft:Siji:style=Regular"
                            , "xft:tewi:style=Bold:pixelsize=11"
                            ]
        , bgColor = "#0b0806"
        , fgColor = "#a19782"
        , alpha = 255
-       , position = Static { xpos = 0
-                           , ypos = 876
-                           , width = 1600
+       , position = Static { xpos = 12
+                           , ypos = 864
+                           , width = 1576
                            , height = 24
                            }
-       , textOffset = 16
-       , textOffsets = [16, -1]
+       , textOffset = 15
+       , textOffsets = [15, 15]
        , iconOffset = -1
        , lowerOnStart = True
        , hideOnStart = False
@@ -43,7 +43,7 @@ Config { font = "xft:tewi:style=Regular:pixelsize=11,Efont Biwidth:pixelsize=12,
                               , "--"
                               , "-P", "\57498", "-Z", "\57499", "-S", "\57497"
                               ] 10
-                    , Run Volume "default" "Master" [ "-t", "<fn=1><status></fn> <volume>%" 
+                    , Run Volume "default" "Master" [ "-t", "<fn=1><status></fn> <volume>%"
                                                     , "--"
                                                     , "--on"   , "\57427"
                                                     , "--off"  , "\57426"
