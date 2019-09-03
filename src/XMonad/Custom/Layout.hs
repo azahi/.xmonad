@@ -6,10 +6,10 @@
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  XMonad.Custom.Layout
--- Copyright   :  (c) azahi 2018
+-- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
 -- License     :  BSD3-style (see LICENSE)
 --
--- Maintainer  :  azahi@teknik.io
+-- Maintainer  :  Azat Bahawi <azahi@teknik.io>
 -- Stability   :  unstable
 -- Portability :  unportable
 --

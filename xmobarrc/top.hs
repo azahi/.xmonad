@@ -38,4 +38,4 @@ Config { font = "xft:tewi:style=Regular:pixelsize=11,Biwidth:pixelsize=12"
                     \ "
        }
 
--- vim:filetype=haskell:expandtab:tabstop=4:shiftwidth=4
+-- vim: filetype=haskell

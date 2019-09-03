@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 PIC="${HOME}/pictures/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png"
 

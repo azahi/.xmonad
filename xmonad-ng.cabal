@@ -1,13 +1,12 @@
 name:          xmonad-ng
-version:       0.15.3
+version:       0.15.4
 synopsis:      XMonad configuration
 description:   XMonad configuration hacked together using stolen code and bad Haskell
-               knowledge
 license:       BSD3
 license-file:  LICENSE
-copyright:     Copyright (c) 2018 azahi
-author:        azahi@teknik.io
-maintainer:    azahi@teknik.io
+copyright:     Copyright (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+author:        Azat Bahawi <azahi@teknik.io>
+maintainer:    Azat Bahawi <azahi@teknik.io>
 stability:     experimental
 category:      System
 homepage:      https://git.systemd.club/xmonad-config

@@ -4,7 +4,7 @@
 -- Copyright   :  (c) 2009 Anders Engstrom <ankaan@gmail.com>
 -- License     :  BSD3-style (see LICENSE)
 --
--- Maintainer  :  azahi@teknik.io
+-- Maintainer  :  Azat Bahawi <azahi@teknik.io>
 -- Stability   :  unstable
 -- Portability :  unportable
 --

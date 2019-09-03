@@ -1,3 +1,15 @@
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  XMonad.Custom.Prompt
+-- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+-- License     :  BSD3-style (see LICENSE)
+--
+-- Maintainer  :  Azat Bahawi <azahi@teknik.io>
+-- Stability   :  unstable
+-- Portability :  unportable
+--
+-----------------------------------------------------------------------------
+
 module XMonad.Custom.Prompt
     ( listCompFunc
     , aListCompFunc

@@ -3,15 +3,12 @@
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  XMonad.Custom.Log
--- Copyright   :  (c) azahi 2018
+-- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
 -- License     :  BSD3-style (see LICENSE)
 --
--- Maintainer  :  azahi <azahi@teknik.io>
+-- Maintainer  :  Azat Bahawi <azahi@teknik.io>
 -- Stability   :  unstable
 -- Portability :  unportable
---
--- Provides configuration for logging to be used
--- with various status display applications
 --
 -----------------------------------------------------------------------------
 

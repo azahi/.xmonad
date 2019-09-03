@@ -3,10 +3,10 @@
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  XMonad.Custom.Bindings
--- Copyright   :  (c) azahi 2018
+-- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
 -- License     :  BSD3-style (see LICENSE)
 --
--- Maintainer  :  azahi@teknik.io
+-- Maintainer  :  Azat Bahawi <azahi@teknik.io>
 -- Stability   :  unstable
 -- Portability :  unportable
 --
@@ -68,14 +68,13 @@ arrowKeys     = [ "<D>" , "<U>" , "<L>" , "<R>" ]
 directionKeys = [  "j"  ,  "k"  ,  "h"  ,  "l"  ]
 wsKeys        = map show [1..9 :: Int]
 
-zipKeys  :: [a] -> [[a]] -> [t1] -> (t1 -> b) ->             [([a], b)]
+zipKeys  :: [a] -> [[a]] -> [t1] -> (t1       -> b) ->       [([a], b)]
 zipKeys  m ks as f   = zipWith (\k d -> (m ++ k, f d))   ks as
 zipKeys' :: [a] -> [[a]] -> [t1] -> (t1 -> t2 -> b) -> t2 -> [([a], b)]
 zipKeys' m ks as f b = zipWith (\k d -> (m ++ k, f d b)) ks as
 
 tryMessageR_ :: (Message a, Message b) => a -> b -> X ()
 tryMessageR_ x y = sequence_ [tryMessageWithNoRefreshToCurrent x y, refresh]
-
 
 toggleCopyToAll :: X ()
 toggleCopyToAll = wsContainingCopies >>= \case [] -> windows copyToAll
@@ -95,29 +94,30 @@ toggleFloat w = windows (\s -> if M.member w (S.floating s)
 
 withUpdatePointer :: [(String, X ())] -> [(String, X ())]
 withUpdatePointer = map addAction
-  where
-    addAction :: (String, X ()) -> (String, X ())
-    addAction (key, action) = (key, action >> updatePointer (0.98, 0.01) (0, 0))
+    where
+        addAction :: (String, X ()) -> (String, X ())
+        addAction (key, action) = (key, action >> updatePointer (0.98, 0.01) (0, 0))
 
 keys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys c = mkKeymap c (rawKeys c)
 
 rawKeys :: XConfig Layout -> [(String, X ())]
-rawKeys c = withUpdatePointer $ concatMap ($ c) keymaps where
-    keymaps = [ keysBase
-              , keysSystem
-              , keysMedia
-              , keysWorkspaces
-              , keysSpawnables
-              , keysWindows
-              , keysLayout
-              , keysResize
-              ]
+rawKeys c = withUpdatePointer $ concatMap ($ c) keymaps
+    where
+        keymaps = [ keysBase
+                  , keysSystem
+                  , keysMedia
+                  , keysWorkspaces
+                  , keysSpawnables
+                  , keysWindows
+                  , keysLayout
+                  , keysResize
+                  ]
 
 keysBase :: XConfig Layout -> [(String, X ())]
 keysBase _ =
     [ ("M-S-q" , confirmPrompt hotPromptTheme "Quit XMonad?" $ io exitSuccess)
-    , ("M-q"   , spawn "xmonad --restart")
+    , ("M-q"   , spawn "xmonad --restart") -- TODO Replace with interal calls
     , ("M-C-q" , spawn "xmonad --recompile && xmonad --restart")
     , ("M-x"   , shellPrompt promptTheme)
     , ("M-w"   , windowPrompt promptTheme Goto  allWindows)
@@ -126,24 +126,25 @@ keysBase _ =
 
 keysSystem :: XConfig Layout -> [(String, X ())]
 keysSystem _ =
-    [ ("M-C-g"             , return ())
+    [ ("M-C-g"             , return ()) -- TODO Replace scripts with internal functions
     , ("<XF86ScreenSaver>" , spawn "~/.xmonad/scripts/screenlock.sh")
     , ("M-<Print>"         , spawn "~/.xmonad/scripts/xshot-upload.sh")
     , ("M-S-<Print>"       , spawn "~/.xmonad/scripts/xshot-select-upload.sh")
     , ("M-<Insert>"        , spawn "~/.xmonad/scripts/xcast.sh --webm")
     , ("M-S-<Insert>"      , spawn "~/.xmonad/scripts/xcast.sh --gif")
-    , ("M-C-<Insert>"      , spawn "pkill ffmpeg")
+    , ("M-C-<Insert>"      , spawn "pkill ffmpeg") -- FIXME Possible undefined behaviour
     , ("M-C-c"             , spawn "~/.xmonad/scripts/toggle-compton.sh")
     , ("M-C-r"             , spawn "~/.xmonad/scripts/toggle-redshift.sh")
     , ("M-C-p"             , spawn "~/.xmonad/scripts/toggle-touchpad.sh")
     , ("M-C-t"             , spawn "~/.xmonad/scripts/toggle-trackpoint.sh")
     ]
 
-keysMedia :: XConfig Layout -> [(String, X ())]
+keysMedia :: XConfig Layout -> [(String, X ())] -- TODO Make audio keys compatible with ALSA/PA at the same time
 keysMedia _ =
-    [ ("<XF86AudioMute>"        , spawn "amixer set Master toggle")
-    , ("<XF86AudioLowerVolume>" , spawn "amixer set Master 5-")
-    , ("<XF86AudioRaiseVolume>" , spawn "amixer set Master 5+")
+    [ ("<XF86AudioMicMute>"     , spawn "pactl set-source-mute 1 toggle") -- TODO Add indicator
+    , ("<XF86AudioMute>"        , spawn "pactl set-sink-mute 0 toggle")
+    , ("<XF86AudioLowerVolume>" , spawn "pactl set-sink-mute 0 false && pactl set-sink-volume 0 -10%")
+    , ("<XF86AudioRaiseVolume>" , spawn "pactl set-sink-mute 0 false && pactl set-sink-volume 0 +10%")
     , ("<XF86AudioPlay>"        , spawn "~/.xmonad/scripts/mpc-play-pause.sh")
     , ("<XF86AudioStop>"        , spawn "mpc --no-status stop")
     , ("<XF86AudioPrev>"        , spawn "mpc --no-status prev")
@@ -177,14 +178,14 @@ keysWindows :: XConfig Layout -> [(String, X())]
 keysWindows _ =
     [ ("M-d"   , kill)
     , ("M-S-d" , confirmPrompt hotPromptTheme "Kill all" killAll)
-    , ("M-C-d" , toggleCopyToAll)
-    , ("M-a"   , withFocused hideWindow) -- FIXME This is so broken
-    , ("M-S-a" , popOldestHiddenWindow)
+    , ("M-a"   , toggleCopyToAll)
+    , ("M-e"   , withFocused hideWindow) -- FIXME This is so broken
+    , ("M-S-e" , popOldestHiddenWindow)
     , ("M-p"   , promote)
-    , ("M-s"   , withFocused $ sendMessage . MergeAll)
-    , ("M-S-s" , withFocused $ sendMessage . UnMerge)
+    , ("M-g"   , withFocused $ sendMessage . MergeAll)
+    , ("M-S-g" , withFocused $ sendMessage . UnMerge)
     , ("M-u"   , focusUrgent)
-    , ("M-e"   , windows S.focusMaster)
+    , ("M-s"   , windows S.focusMaster)
     , ("M-'"   , bindOn LD [ ("Tabs" , windows S.focusDown)
                            , (""     , onGroup S.focusDown')
                            ])
@@ -206,8 +207,8 @@ keysLayout c =
     [ ("M-<Tab>"   , sendMessage NextLayout)
     , ("M-C-<Tab>" , toSubl NextLayout)
     , ("M-S-<Tab>" , setLayout $ XMonad.layoutHook c)
-    , ("M-y"       , withFocused toggleFloat)
-    , ("M-S-y"     , sinkAll)
+    , ("M-o"       , withFocused toggleFloat)
+    , ("M-S-o"     , sinkAll)
     , ("M-S-,"     , sendMessage $ IncMasterN (-1))
     , ("M-S-."     , sendMessage $ IncMasterN 1)
     , ("M-r"       , tryMessageR_ Rotate (Toggle REFLECTX))
@@ -215,7 +216,7 @@ keysLayout c =
     , ("M-f"       , sequence_ [ withFocused $ windows . S.sink
                                , sendMessage $ Toggle NBFULL
                                ])
-    , ("M-S-g"     , sendMessage $ Toggle GAPS) -- FIXME Breaks merged tabbed layout
+    , ("M-C-g"     , sendMessage $ Toggle GAPS) -- FIXME Breaks merged tabbed layout
     ]
 
 keysResize :: XConfig Layout -> [(String, X())]
@@ -235,13 +236,13 @@ mouseBindings XConfig {} = M.fromList
     [ ((modMask, button1), \w -> focus w
                                  >> F.mouseWindow F.position w
                                  >> ifClick (snapSpacedMagicMove gapFull
-                                             (Just 50) (Just 50) w)
+                                                (Just 50) (Just 50) w)
                                  >> windows S.shiftMaster
       )
     , ((modMask, button3), \w -> focus w
                                  >> F.mouseWindow F.linear w
                                  >> ifClick (snapMagicResize [L, R, U, D]
-                                             (Just 50) (Just 50) w)
+                                                (Just 50) (Just 50) w)
                                  >> windows S.shiftMaster
       )
     ]

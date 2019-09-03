@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 SRC_DIR="$HOME/.xmonad"
 EXE_NAME="xmonad-ng"

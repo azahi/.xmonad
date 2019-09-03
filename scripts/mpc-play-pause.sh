@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-if mpc | grep -q "playing"
+if mpc | grep -q '\[playing\]'
 then
     mpc --no-status pause
 else

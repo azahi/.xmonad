@@ -1,16 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-status="$(fcitx-remote)"
-set out
+STATUS="$(fcitx-remote)"
 
-if   [[ "$status" = 0 ]]
+if   [ "$STATUS" = 0 ]
 then
-    out="Off"
-elif [[ "$status" = 1 ]]
+    OUT="Off"
+elif [ "$STATUS" = 1 ]
 then
-    out="Disabled"
-else 
-    out="Enabled"
+    OUT="Disabled"
+else
+    OUT="Enabled"
 fi
 
-echo -e "$out"
+echo "$OUT"

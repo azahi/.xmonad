@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 if tmux list-sessions | grep -q "scratchpad"
 then
