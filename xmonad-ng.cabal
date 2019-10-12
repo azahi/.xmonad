@@ -1,5 +1,5 @@
 name:          xmonad-ng
-version:       0.15.4
+version:       0.15.5
 synopsis:      XMonad configuration
 description:   XMonad configuration hacked together using stolen code and bad Haskell
 license:       BSD3
@@ -9,13 +9,13 @@ author:        Azat Bahawi <azahi@teknik.io>
 maintainer:    Azat Bahawi <azahi@teknik.io>
 stability:     experimental
 category:      System
-homepage:      https://git.systemd.club/xmonad-config
+homepage:      https://github.com/azahi/xmonad-config
 build-type:    Simple
 cabal-version: >= 2.0
 
 source-repository head
   type:     git
-  location: https://git.systemd.club/xmonad-config
+  location: https://github.com/azahi/xmonad-config
 
 executable xmonad-ng
   main-is:          Main.hs
@@ -34,8 +34,8 @@ executable xmonad-ng
                     XMonad.Custom.Theme
                     XMonad.Custom.Workspaces
   hs-source-dirs:   src
-  build-depends:    base           >= 4.12 && < 4.13
-                  , X11            >= 1.9 && < 1.10
+  build-depends:    X11            >= 1.9 && < 1.10
+                  , base           >= 4.12 && < 4.13
                   , containers     >= 0.6 && < 0.7
                   , directory      >= 1.3 && < 1.4
                   , filepath       >= 1.4 && < 1.5
@@ -43,7 +43,7 @@ executable xmonad-ng
                   , text           >= 1.2 && < 1.3
                   , time           >= 1.8 && < 1.9
                   , xmonad         >= 0.15 && < 0.16
-                  , xmonad-contrib >= 0.15 && < 0.16
+                  , xmonad-contrib >= 0.16 && < 0.17
   default-language: Haskell2010
   other-extensions: MultiParamTypeClasses
                     CPP
