@@ -1,20 +1,17 @@
------------------------------------------------------------------------------
 -- |
--- Module      :  XMonad.Custom.Manage
--- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
--- License     :  BSD3-style (see LICENSE)
+-- Module      : XMonad.Custom.Manage
+-- Copyright   : (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+-- License     : BSD3-style (see LICENSE)
+-- Maintainer  : Azat Bahawi <azahi@teknik.io>
+-- Stability   : unstable
+-- Portability : unportable
 --
--- Maintainer  :  Azat Bahawi <azahi@teknik.io>
--- Stability   :  unstable
--- Portability :  unportable
---
------------------------------------------------------------------------------
 
 module XMonad.Custom.Manage
     ( manageHook
     ) where
 
-import           XMonad                      hiding (manageHook)
+import           XMonad                      hiding ( manageHook )
 import           XMonad.Custom.Scratchpads
 import           XMonad.Hooks.InsertPosition
 import           XMonad.Hooks.ManageDocks

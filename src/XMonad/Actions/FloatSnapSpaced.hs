@@ -1,14 +1,11 @@
------------------------------------------------------------------------------
 -- |
--- Module      :  XMonad.Actions.FloatSnapSpaced
--- Copyright   :  (c) 2009 Anders Engstrom <ankaan@gmail.com>
--- License     :  BSD3-style (see LICENSE)
+-- Module      : XMonad.Actions.FloatSnapSpaced
+-- Copyright   : (c) 2009 Anders Engstrom <ankaan@gmail.com>
+-- License     : BSD3-style (see LICENSE)
+-- Maintainer  : Azat Bahawi <azahi@teknik.io>
+-- Stability   : unstable
+-- Portability : unportable
 --
--- Maintainer  :  Azat Bahawi <azahi@teknik.io>
--- Stability   :  unstable
--- Portability :  unportable
---
------------------------------------------------------------------------------
 
 module XMonad.Actions.FloatSnapSpaced
     ( snapSpacedMagicMove

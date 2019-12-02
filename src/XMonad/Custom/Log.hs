@@ -1,23 +1,18 @@
-{-# LANGUAGE LambdaCase #-}
-
------------------------------------------------------------------------------
 -- |
--- Module      :  XMonad.Custom.Log
--- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
--- License     :  BSD3-style (see LICENSE)
+-- Module      : XMonad.Custom.Log
+-- Copyright   : (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+-- License     : BSD3-style (see LICENSE)
+-- Maintainer  : Azat Bahawi <azahi@teknik.io>
+-- Stability   : unstable
+-- Portability : unportable
 --
--- Maintainer  :  Azat Bahawi <azahi@teknik.io>
--- Stability   :  unstable
--- Portability :  unportable
---
------------------------------------------------------------------------------
 
 module XMonad.Custom.Log
     ( logHook
     ) where
 
 import           System.IO
-import           XMonad                             hiding (logHook)
+import           XMonad                             hiding ( logHook )
 import           XMonad.Actions.CopyWindow
 import           XMonad.Custom.Theme
 import           XMonad.Hooks.CurrentWorkspaceOnTop

@@ -1,14 +1,11 @@
------------------------------------------------------------------------------
 -- |
--- Module      :  XMonad.Custom.Startup
--- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
--- License     :  BSD3-style (see LICENSE)
+-- Module      : XMonad.Custom.Startup
+-- Copyright   : (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+-- License     : BSD3-style (see LICENSE)
+-- Maintainer  : Azat Bahawi <azahi@teknik.io>
+-- Stability   : unstable
+-- Portability : unportable
 --
--- Maintainer  :  Azat Bahawi <azahi@teknik.io>
--- Stability   :  unstable
--- Portability :  unportable
---
------------------------------------------------------------------------------
 
 module XMonad.Custom.Startup
     ( startupHook
@@ -16,7 +13,7 @@ module XMonad.Custom.Startup
 
 import           Control.Monad
 import           Data.Maybe
-import           XMonad                     hiding (startupHook)
+import           XMonad                     hiding ( startupHook )
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.SetWMName
 import           XMonad.Util.Cursor

@@ -3,24 +3,21 @@
 {-# LANGUAGE TypeSynonymInstances  #-}
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
 
------------------------------------------------------------------------------
 -- |
--- Module      :  XMonad.Custom.Layout
--- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
--- License     :  BSD3-style (see LICENSE)
+-- Module      : XMonad.Custom.Layout
+-- Copyright   : (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+-- License     : BSD3-style (see LICENSE)
+-- Maintainer  : Azat Bahawi <azahi@teknik.io>
+-- Stability   : unstable
+-- Portability : unportable
 --
--- Maintainer  :  Azat Bahawi <azahi@teknik.io>
--- Stability   :  unstable
--- Portability :  unportable
---
------------------------------------------------------------------------------
 
 module XMonad.Custom.Layout
     ( layoutHook
     , CustomTransformers (..)
     ) where
 
-import           XMonad                              hiding (layoutHook)
+import           XMonad                              hiding ( layoutHook )
 import           XMonad.Custom.Theme
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Layout.Accordion

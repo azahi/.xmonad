@@ -1,16 +1,13 @@
 {-# LANGUAGE LambdaCase #-}
 
------------------------------------------------------------------------------
 -- |
--- Module      :  XMonad.Custom.Bindings
--- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
--- License     :  BSD3-style (see LICENSE)
+-- Module      : XMonad.Custom.Bindings
+-- Copyright   : (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+-- License     : BSD3-style (see LICENSE)
+-- Maintainer  : Azat Bahawi <azahi@teknik.io>
+-- Stability   : unstable
+-- Portability : unportable
 --
--- Maintainer  :  Azat Bahawi <azahi@teknik.io>
--- Stability   :  unstable
--- Portability :  unportable
---
------------------------------------------------------------------------------
 
 module XMonad.Custom.Bindings
     ( keys
@@ -21,8 +18,8 @@ module XMonad.Custom.Bindings
 
 import qualified Data.Map                            as M
 import           System.Exit
-import           XMonad                              hiding (keys, modMask,
-                                                      mouseBindings)
+import           XMonad                              hiding ( keys, modMask,
+                                                       mouseBindings )
 import           XMonad.Actions.CopyWindow
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.DynamicProjects
@@ -174,7 +171,7 @@ keysSpawnables _ =
     , ("M-v"        , namedScratchpadAction scratchpads "volume")
     ]
 
-keysWindows :: XConfig Layout -> [(String, X())]
+keysWindows :: XConfig Layout -> [(String, X ())]
 keysWindows _ =
     [ ("M-d"   , kill)
     , ("M-S-d" , confirmPrompt hotPromptTheme "Kill all" killAll)
@@ -202,7 +199,7 @@ keysWindows _ =
     ++ zipKeys' "M-S-" arrowKeys directions windowToScreen True
     ++ zipKeys' "M-C-" arrowKeys directions screenSwap     True
 
-keysLayout :: XConfig Layout -> [(String, X())]
+keysLayout :: XConfig Layout -> [(String, X ())]
 keysLayout c =
     [ ("M-<Tab>"   , sendMessage NextLayout)
     , ("M-C-<Tab>" , toSubl NextLayout)
@@ -219,7 +216,7 @@ keysLayout c =
     , ("M-C-g"     , sendMessage $ Toggle GAPS) -- FIXME Breaks merged tabbed layout
     ]
 
-keysResize :: XConfig Layout -> [(String, X())]
+keysResize :: XConfig Layout -> [(String, X ())]
 keysResize _ =
     [ ("M-["     , tryMessageR_ (ExpandTowards L) Shrink)
     , ("M-]"     , tryMessageR_ (ExpandTowards R) Expand)
@@ -235,14 +232,10 @@ mouseBindings :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
 mouseBindings XConfig {} = M.fromList
     [ ((modMask, button1), \w -> focus w
                                  >> F.mouseWindow F.position w
-                                 >> ifClick (snapSpacedMagicMove gapFull
-                                                (Just 50) (Just 50) w)
-                                 >> windows S.shiftMaster
-      )
+                                 >> ifClick (snapSpacedMagicMove gapFull (Just 50) (Just 50) w)
+                                 >> windows S.shiftMaster)
     , ((modMask, button3), \w -> focus w
                                  >> F.mouseWindow F.linear w
-                                 >> ifClick (snapMagicResize [L, R, U, D]
-                                                (Just 50) (Just 50) w)
-                                 >> windows S.shiftMaster
-      )
+                                 >> ifClick (snapMagicResize [L, R, U, D] (Just 50) (Just 50) w)
+                                 >> windows S.shiftMaster)
     ]

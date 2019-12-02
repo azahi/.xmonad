@@ -1,14 +1,11 @@
------------------------------------------------------------------------------
 -- |
--- Module      :  Main
--- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
--- License     :  BSD3-style (see LICENSE)
+-- Module      : Main
+-- Copyright   : (c) 2018-2019 Azat Bahawi
+-- License     : BSD3-style (see LICENSE)
+-- Maintainer  : Azat Bahawi <azahi@teknik.io>
+-- Stability   : unstable
+-- Portability : unportable
 --
--- Maintainer  :  Azat Bahawi <azahi@teknik.io>
--- Stability   :  unstable
--- Portability :  unportable
---
------------------------------------------------------------------------------
 
 module Main where
 
@@ -38,8 +35,8 @@ main = xmonad
        $ withNavigation2DConfig C.navigation
        $ dynamicProjects C.projects
        $ def { borderWidth        = C.border
-             , workspaces         = C.workspaces -- TODO save WS state
-             , layoutHook         = C.layoutHook -- TODO save layout state and floating W position
+             , workspaces         = C.workspaces
+             , layoutHook         = C.layoutHook
              , terminal           = C.term C.applications
              , normalBorderColor  = C.colorN
              , focusedBorderColor = C.colorF

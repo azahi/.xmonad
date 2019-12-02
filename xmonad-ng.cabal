@@ -1,53 +1,61 @@
 name:          xmonad-ng
-version:       0.15.5
+version:       0.15.6
 synopsis:      XMonad configuration
-description:   XMonad configuration hacked together using stolen code and bad Haskell
+description:
+    This package is a window manager built on top of xmonad and xmonad-contrib
+    libraries targeted for a single-display GNU\/Linux machine running Xorg.
+    .
+    Made with efficiency in mind this window manager enables controlling windows
+    using only keyboard and allows using multiple workspaces, scratchpads,
+    window layouts and etc.
 license:       BSD3
 license-file:  LICENSE
-copyright:     Copyright (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+copyright:     (c) 2018-2019 Azat Bahawi
 author:        Azat Bahawi <azahi@teknik.io>
 maintainer:    Azat Bahawi <azahi@teknik.io>
 stability:     experimental
+tested-with:   GHC == 8.6.5
 category:      System
 homepage:      https://github.com/azahi/xmonad-config
+bug-reports:   https://github.com/azahi/xmonad-config/issues
 build-type:    Simple
 cabal-version: >= 2.0
 
 source-repository head
-  type:     git
-  location: https://github.com/azahi/xmonad-config
+    type:     git
+    location: https://github.com/azahi/xmonad-config
 
 executable xmonad-ng
-  main-is:          Main.hs
-  other-modules:    XMonad.Actions.FloatSnapSpaced
-                    XMonad.Actions.PerConditionKeys
-                    XMonad.Custom.Bindings
-                    XMonad.Custom.Event
-                    XMonad.Custom.Layout
-                    XMonad.Custom.Log
-                    XMonad.Custom.Manage
-                    XMonad.Custom.Misc
-                    XMonad.Custom.Navigation
-                    XMonad.Custom.Projects
-                    XMonad.Custom.Scratchpads
-                    XMonad.Custom.Startup
-                    XMonad.Custom.Theme
-                    XMonad.Custom.Workspaces
-  hs-source-dirs:   src
-  build-depends:    X11            >= 1.9 && < 1.10
-                  , base           >= 4.12 && < 4.13
-                  , containers     >= 0.6 && < 0.7
-                  , directory      >= 1.3 && < 1.4
-                  , filepath       >= 1.4 && < 1.5
-                  , mtl            >= 2.2 && < 2.3
-                  , text           >= 1.2 && < 1.3
-                  , time           >= 1.8 && < 1.9
-                  , xmonad         >= 0.15 && < 0.16
-                  , xmonad-contrib >= 0.16 && < 0.17
-  default-language: Haskell2010
-  other-extensions: MultiParamTypeClasses
-                    CPP
-                    TypeSynonymInstances
-                    DeriveDataTypeable
-                    LambdaCase
-  ghc-options:      -Wall
+    main-is:          Main.hs
+    other-modules:    XMonad.Actions.FloatSnapSpaced
+                      XMonad.Actions.PerConditionKeys
+                      XMonad.Custom.Bindings
+                      XMonad.Custom.Event
+                      XMonad.Custom.Layout
+                      XMonad.Custom.Log
+                      XMonad.Custom.Manage
+                      XMonad.Custom.Misc
+                      XMonad.Custom.Navigation
+                      XMonad.Custom.Projects
+                      XMonad.Custom.Scratchpads
+                      XMonad.Custom.Startup
+                      XMonad.Custom.Theme
+                      XMonad.Custom.Workspaces
+    hs-source-dirs:   src
+    build-depends:    base           >= 4.9 && < 5
+                    , X11            >= 1.6 && < 1.10
+                    , containers     >= 0.6 && < 0.7
+                    , directory      >= 1.3 && < 1.4
+                    , filepath       >= 1.4 && < 1.5
+                    , mtl            >= 1 && < 3
+                    , text           >= 1.2 && < 1.3
+                    , time           >= 1.8 && < 1.9
+                    , xmonad         >= 0.15 && < 0.16
+                    , xmonad-contrib >= 0.16 && < 0.17
+    default-language: Haskell2010
+    other-extensions: MultiParamTypeClasses
+                      CPP
+                      TypeSynonymInstances
+                      DeriveDataTypeable
+                      LambdaCase
+    ghc-options:      -Wall

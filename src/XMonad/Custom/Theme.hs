@@ -1,14 +1,11 @@
------------------------------------------------------------------------------
 -- |
--- Module      :  XMonad.Custom.Theme
--- Copyright   :  (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
--- License     :  BSD3-style (see LICENSE)
+-- Module      : XMonad.Custom.Theme
+-- Copyright   : (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+-- License     : BSD3-style (see LICENSE)
+-- Maintainer  : Azat Bahawi <azahi@teknik.io>
+-- Stability   : unstable
+-- Portability : unportable
 --
--- Maintainer  :  Azat Bahawi <azahi@teknik.io>
--- Stability   :  unstable
--- Portability :  unportable
---
------------------------------------------------------------------------------
 
 module XMonad.Custom.Theme
     ( font
@@ -41,10 +38,10 @@ module XMonad.Custom.Theme
 import           Data.Char
 import           Data.Function
 import           Data.List
+import           Data.Ratio
 import           Graphics.X11.Xlib.Types
 import           XMonad.Layout.Decoration
 import qualified XMonad.Prompt            as P
-import Data.Ratio
 
 font :: String
 font = "xft:tewi:style=Regular:size=8" -- TODO CJKのフォールバックフォントを追加する
