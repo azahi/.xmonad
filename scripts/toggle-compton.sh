@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 if ! pgrep compton
 then
-    compton -b --config "${XDG_CONFIG_HOME}/compton.conf"
+    compton -b --config "$XDG_CONFIG_HOME/compton.conf"
 else
     pkill compton
 fi

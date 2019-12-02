@@ -8,11 +8,30 @@ shift
 
 cd "$SRC_DIR" || exit 1
 
-cabal new-configure \
-	--enable-optimization \
-	--enable-executable-stripping
+if command -v cabal >/dev/null 2>&1
+then
+    #echo ">>> cabal sandbox init <<<"
+    #cabal sandbox --verbose init || exit 1
 
-cabal new-build
+    echo ">>> cabal new-configure <<<"
+    cabal new-configure \
+        --verbose \
+	    --enable-optimization \
+        --enable-executable-stripping || exit 1
 
-find "$SRC_DIR"/dist-newstyle -type f -executable -name "$EXE_NAME" \
-    -exec mv -u '{}' "$OUT" ';'
+    #echo ">>> cabal install <<<"
+    #cabal install --verbose --only-dependencies || exit 1
+
+    echo ">>> cabal new-build <<<"
+    cabal new-build --verbose || exit 1
+
+    find "$SRC_DIR"/dist-newstyle -type f -executable -name "$EXE_NAME" \
+        -exec mv -u '{}' "$OUT" ';' || exit 1
+else
+    unset STACK_YAML
+
+    echo ">>> stack build <<<"
+    stack build --verbose || exit 1
+
+    ln -f -T "$(stack exec -- which $EXE_NAME)" "$1" || exit 1
+fi

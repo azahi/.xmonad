@@ -2,7 +2,7 @@
 
 STATUS="$(fcitx-remote)"
 
-if   [ "$STATUS" = 0 ]
+if [ "$STATUS" = 0 ]
 then
     OUT="Off"
 elif [ "$STATUS" = 1 ]
