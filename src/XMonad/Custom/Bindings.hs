@@ -143,9 +143,9 @@ keysMedia _ =
     , ("<XF86AudioLowerVolume>" , spawn "pactl set-sink-mute 0 false && pactl set-sink-volume 0 -10%")
     , ("<XF86AudioRaiseVolume>" , spawn "pactl set-sink-mute 0 false && pactl set-sink-volume 0 +10%")
     , ("<XF86AudioPlay>"        , spawn "~/.xmonad/scripts/mpc-play-pause.sh")
-    , ("<XF86AudioStop>"        , spawn "mpc --no-status stop")
-    , ("<XF86AudioPrev>"        , spawn "mpc --no-status prev")
-    , ("<XF86AudioNext>"        , spawn "mpc --no-status next")
+    , ("<XF86AudioStop>"        , spawn "mpc stop")
+    , ("<XF86AudioPrev>"        , spawn "mpc prev")
+    , ("<XF86AudioNext>"        , spawn "mpc next")
     ]
 
 keysWorkspaces :: XConfig Layout -> [(String, X ())]
