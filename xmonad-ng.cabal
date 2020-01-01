@@ -10,7 +10,7 @@ description:
     window layouts and etc.
 license:       BSD3
 license-file:  LICENSE
-copyright:     (c) 2018-2019 Azat Bahawi
+copyright:     (c) 2018-2020 Azat Bahawi
 author:        Azat Bahawi <azahi@teknik.io>
 maintainer:    Azat Bahawi <azahi@teknik.io>
 stability:     experimental

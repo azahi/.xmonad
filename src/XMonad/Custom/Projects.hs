@@ -1,6 +1,6 @@
 -- |
 -- Module      : XMonad.Custom.Projects
--- Copyright   : (c) 2018-2019 Azat Bahawi <azahi@teknik.io>
+-- Copyright   : (c) 2018-2020 Azat Bahawi <azahi@teknik.io>
 -- License     : BSD3-style (see LICENSE)
 -- Maintainer  : Azat Bahawi <azahi@teknik.io>
 -- Stability   : unstable

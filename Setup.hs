@@ -1,6 +1,6 @@
 -- |
 -- Module      : Setup
--- Copyright   : (c) 2018-2019 Azat Bahawi
+-- Copyright   : (c) 2018-2020 Azat Bahawi
 -- License     : BSD3-style (see LICENSE)
 -- Maintainer  : Azat Bahawi <azahi@teknik.io>
 -- Stability   : unstable
