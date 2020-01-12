@@ -52,7 +52,7 @@ fi
 
 if [ -d .stack-work ]
 then
-    echo "test-xephyt.sh: Stack build detected"
+    echo "test-xephyr.sh: Stack build detected"
     BIN_PATH=$(stack path --dist-dir)/build/xmonad-ng
 elif [ -d dist ]; then
     echo "test-xephyr.sh: Cabal build detected"
@@ -104,8 +104,7 @@ done
     export DISPLAY=":$DISPLAY_NUMBER"
     echo "test-xephyr.sh: Waiting for windwos to appear..." && sleep 3
 
-    xterm -hold xrandr &
-    xterm &
+    xrdb "$HOME/.Xresources" && urxvt &
 
     $ARCH_BIN
 )

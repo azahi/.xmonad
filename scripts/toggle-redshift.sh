@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-if ! pgrep redshift
+if ! pgrep redshift > /dev/null 2>&1
 then
-    redshift -c "$XDG_CONFIG_HOME/redshift.conf" &
+    redshift &
     disown redshift
 else
     pkill redshift

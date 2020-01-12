@@ -127,9 +127,6 @@ keysSystem _ =
     , ("<XF86ScreenSaver>" , spawn "~/.xmonad/scripts/screenlock.sh")
     , ("M-<Print>"         , spawn "~/.xmonad/scripts/xshot-upload.sh")
     , ("M-S-<Print>"       , spawn "~/.xmonad/scripts/xshot-select-upload.sh")
-    , ("M-<Insert>"        , spawn "~/.xmonad/scripts/xcast.sh --webm")
-    , ("M-S-<Insert>"      , spawn "~/.xmonad/scripts/xcast.sh --gif")
-    , ("M-C-<Insert>"      , spawn "pkill ffmpeg") -- FIXME Possible undefined behaviour
     , ("M-C-c"             , spawn "~/.xmonad/scripts/toggle-compton.sh")
     , ("M-C-r"             , spawn "~/.xmonad/scripts/toggle-redshift.sh")
     , ("M-C-p"             , spawn "~/.xmonad/scripts/toggle-touchpad.sh")
@@ -138,11 +135,11 @@ keysSystem _ =
 
 keysMedia :: XConfig Layout -> [(String, X ())] -- TODO Make audio keys compatible with ALSA/PA at the same time
 keysMedia _ =
-    [ ("<XF86AudioMicMute>"     , spawn "pactl set-source-mute 1 toggle") -- TODO Add indicator
+    [ ("<XF86AudioMicMute>"     , spawn "pactl set-source-mute 1 toggle")
     , ("<XF86AudioMute>"        , spawn "pactl set-sink-mute 0 toggle")
     , ("<XF86AudioLowerVolume>" , spawn "pactl set-sink-mute 0 false && pactl set-sink-volume 0 -10%")
     , ("<XF86AudioRaiseVolume>" , spawn "pactl set-sink-mute 0 false && pactl set-sink-volume 0 +10%")
-    , ("<XF86AudioPlay>"        , spawn "~/.xmonad/scripts/mpc-play-pause.sh")
+    , ("<XF86AudioPlay>"        , spawn "mpc toggle")
     , ("<XF86AudioStop>"        , spawn "mpc stop")
     , ("<XF86AudioPrev>"        , spawn "mpc prev")
     , ("<XF86AudioNext>"        , spawn "mpc next")

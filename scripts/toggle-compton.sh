@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if ! pgrep compton
+if ! pgrep compton > /dev/null 2>&1
 then
-    compton -b --config "$XDG_CONFIG_HOME/compton.conf"
+    compton -b
 else
     pkill compton
 fi

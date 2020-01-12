@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if tmux list-sessions | grep -q "scratchpad"
+if tmux list-sessions | grep "scratchpad"
 then
     tmux attach-session -t "scratchpad"
 else

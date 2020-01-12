@@ -1,13 +1,15 @@
 *.hi
 *.o
 .cabal-sandbox/
-.ghc.*
+.ghc.environment.*
 .hdevtools.*
 .stack-work/
-cabal.project.*
+cabal.project.local
+cabal.project.local~
 cabal.sandbox.config
 dist-newstyle/
 dist/
 prompt-history
+stack.yaml.lock
 xmonad-*-*
 xmonad.errors
