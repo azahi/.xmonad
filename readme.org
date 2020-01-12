@@ -1,1 +1,35 @@
-* azahi's XMonad configuration (xmonad-ng)
+* XMonad
+XMonad configuration formerly known as "xmonad-ng".
+
+** Example Installation
+Clone this repository with submodules in the root of your home directory:
+#+BEGIN_SRC bash
+git clone --recursive https://github.com/azahi/xmonad-config ~/.xmonad
+#+END_SRC
+
+Enter the cloned directory:
+#+BEGIN_SRC bash
+cd ~/.xmonad
+#+END_SRC
+
+If you don't have a /xmonad/ executable in your PATH, depending on the build
+system that you want to use, execute:
+#+BEGIN_SRC bash
+stack update
+stack build
+#+END_SRC
+or
+#+BEGIN_SRC bash
+cabal new-update
+cabal new-configure
+cabal new-build
+#+END_SRC
+
+If you have the /xmonad/ executable you can just simply run:
+#+BEGIN_SRC bash
+xmonad --recompile
+#+END_SRC
+
+** Copyright
+All of the source code including vendored xmonad, xmonad-contrib and xmobar packages
+are released under BSD 3-Clause license.
