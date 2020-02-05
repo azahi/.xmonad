@@ -28,11 +28,6 @@ Config { font = "xft:tewi:style=Regular:pixelsize=11,Biwidth:pixelsize=12"
                                   , "--"
                                   , "-i", "\57914", "-O", "\57913" , "-o", "\57911"
                                   ] 10
-                    , Run Cpu [ "-t", "<fn=1>\57381</fn> <total>%" ] 10
-                    , Run CoreTemp [ "-t", "<core0>°C / <core1>°C" ] 10
-                    , Run Memory [ "-t", "<fn=1>\57384</fn> <usedratio>%" ] 10
-                    , Run ThermalZone 0 ["-t","<fn=1>\57371</fn> <temp>°C"] 10
-                    , Run ThermalZone 1 ["-t","<temp>°C"] 10
                     , Run Wireless "wlp3s0" [ "-t", "<fn=1>\57775</fn> <essid> @ <quality>%" ] 10
                     , Run DynNetwork [ "-t", "<fn=1>\57660</fn> <rx> / <fn=1>\57659</fn> <tx> kbps" ] 10
                     , Run Kbd [ ("us", "English")
