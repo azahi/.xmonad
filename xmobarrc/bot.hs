@@ -23,15 +23,15 @@ Config { font = "xft:tewi:style=Regular:pixelsize=11,Biwidth:pixelsize=12"
        , borderColor = "#2f2b2a"
        , borderWidth = 1
        , iconRoot = "."
-       , commands = [ Run StdinReader
-                    , Run Battery [ "-t", "<fn=1><acstatus></fn> <left>%"
+       , commands = [ Run Battery [ "-t", "<fn=1><acstatus></fn> <left>%"
                                   , "--"
                                   , "-i", "\57914", "-O", "\57913" , "-o", "\57911"
                                   ] 10
                     , Run Wireless "wlp3s0" [ "-t", "<fn=1>\57775</fn> <essid> @ <quality>%" ] 10
                     , Run DynNetwork [ "-t", "<fn=1>\57660</fn> <rx> / <fn=1>\57659</fn> <tx> kbps" ] 10
                     , Run Kbd [ ("us", "English")
-                              , ("ru", "Russian")]
+                              , ("ru", "Русский")
+                              ]
                     , Run Com "/home/free/.xmonad/scripts/xmobar/fcitx.sh" [] "fcitx" 3
                     , Run Locks
                     , Run MPD [ "-t", "<fn=1><statei></fn> <artist> - <title>"
@@ -49,7 +49,7 @@ Config { font = "xft:tewi:style=Regular:pixelsize=11,Biwidth:pixelsize=12"
        , sepChar = "%"
        , alignSep = "}{"
        , template = " \
-                    \%battery%   %wlp3s0wi%   %dynnetwork%   %StdinReader%\
+                    \%battery%   %wlp3s0wi%   %dynnetwork%\
                     \}\
                     \%kbd% / %fcitx%\
                     \{\
