@@ -4,6 +4,3 @@
 [submodule "vendor/xmonad-contrib"]
 	path = vendor/xmonad-contrib
 	url = https://github.com/azahi/xmonad-contrib
-[submodule "vendor/xmobar"]
-	path = vendor/xmobar
-	url = https://github.com/azahi/xmobar
