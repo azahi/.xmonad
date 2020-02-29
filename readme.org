@@ -31,5 +31,6 @@ xmonad --recompile
 #+END_SRC
 
 ** Copyright
-All of the source code including vendored xmonad, xmonad-contrib and xmobar packages
-are released under BSD 3-Clause license.
+All of the source code including vendored xmonad and xmonad-contrib packages are
+released under BSD 3-Clause license. All of the rights to the vendored code
+belongs to respective authors.
