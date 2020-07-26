@@ -8,8 +8,15 @@ shift
 
 cd "$SRC_DIR" || exit 1
 
-if command -v cabal >/dev/null 2>&1
+if command -v stack >/dev/null 2>&1
 then
+    unset STACK_YAML
+
+    echo ">>> stack build <<<"
+    stack build --verbose || exit 1
+
+    ln -f -T "$(stack exec -- which $EXE_NAME)" "$OUT" || exit 1
+else
     #echo ">>> cabal sandbox init <<<"
     #cabal sandbox --verbose init || exit 1
 
@@ -27,11 +34,4 @@ then
 
     find "$SRC_DIR"/dist-newstyle -type f -executable -name "$EXE_NAME" \
         -exec mv -u '{}' "$OUT" ';' || exit 1
-else
-    unset STACK_YAML
-
-    echo ">>> stack build <<<"
-    stack build --verbose || exit 1
-
-    ln -f -T "$(stack exec -- which $EXE_NAME)" "$1" || exit 1
 fi
