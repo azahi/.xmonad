@@ -11,7 +11,7 @@ Config { font = "xft:tewi:style=Regular:pixelsize=11,Biwidth:pixelsize=12"
                            , height = 24
                            }
        , textOffset = 15
-       , textOffsets = [15, 15]
+       , textOffsets = [ 15, 15 ]
        , iconOffset = -1
        , lowerOnStart = True
        , hideOnStart = False

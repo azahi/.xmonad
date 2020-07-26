@@ -61,6 +61,7 @@ logHook = do
     currentWorkspaceOnTop
     ewmhDesktopsLogHook
     t <- getNamedPipe "xmobarTop"
+    b <- getNamedPipe "xmobarBot"
     c <- wsContainingCopies
     let copiesCurrent ws | ws `elem` c = xmobarColor yellow2 "" . xmobarFont 2 . wrap "*" "=" $ ws
                          | otherwise   = xmobarColor white2  "" . xmobarFont 2 . wrap "=" "=" $ ws
@@ -73,4 +74,7 @@ logHook = do
         , ppHidden  = copiesHidden
         , ppUrgent  = copiesUrgent
         , ppOutput  = safePrintToPipe t
+        }
+    dynamicLogWithPP $ botBarPP
+        { ppOutput  = safePrintToPipe b
         }

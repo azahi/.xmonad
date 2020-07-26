@@ -18,7 +18,6 @@ import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.SetWMName
 import           XMonad.Util.Cursor
 import           XMonad.Util.SpawnNamedPipe
-import           XMonad.Util.SpawnOnce
 
 atomsToFullscreen :: [String]
 atomsToFullscreen =
@@ -50,7 +49,7 @@ addEWMHFullscreen = do
 startupHook :: X ()
 startupHook = do
     spawnNamedPipe "xmobar ~/.xmonad/xmobarrc/top.hs" "xmobarTop"
-    spawnOnce "xmobar ~/.xmonad/xmobarrc/bot.hs"
+    spawnNamedPipe "xmobar ~/.xmonad/xmobarrc/bot.hs" "xmobarBot"
     docksStartupHook
     addEWMHFullscreen
     setDefaultCursor xC_left_ptr
