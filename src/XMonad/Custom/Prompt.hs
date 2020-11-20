@@ -8,10 +8,10 @@
 --
 
 module XMonad.Custom.Prompt
-    ( listCompFunc
-    , aListCompFunc
-    , predicateFunction
-    ) where
+  ( listCompFunc
+  , aListCompFunc
+  , predicateFunction
+  ) where
 
 import           Data.Char
 import           Data.List

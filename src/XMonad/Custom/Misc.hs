@@ -10,25 +10,25 @@
 --
 
 module XMonad.Custom.Misc
-    ( Applications (..)
-    , applications
-    ) where
+  ( Applications(..)
+  , applications
+  ) where
 
 data Applications = Applications
-    { browser :: !String
-    , mixer   :: !String
-    , notify  :: !String
-    , player  :: !String
-    , term    :: !String
-    , top     :: !String
-    } deriving (Eq, Show)
+  { browser :: !String
+  , mixer   :: !String
+  , notify  :: !String
+  , player  :: !String
+  , term    :: !String
+  , top     :: !String
+  }
+  deriving (Eq, Show)
 
 applications :: Applications
-applications = Applications
-    { browser = "qutebrowser"
-    , mixer   = "pulsemixer"
-    , notify  = "notify-send"
-    , player  = "ncmpcpp"
-    , term    = "urxvtc"
-    , top     = "htop"
-    }
+applications = Applications { browser = "qutebrowser"
+                            , mixer   = "pulsemixer"
+                            , notify  = "notify-send"
+                            , player  = "ncmpcpp"
+                            , term    = "urxvtc"
+                            , top     = "htop"
+                            }

@@ -8,27 +8,25 @@
 --
 
 module XMonad.Custom.Projects
-    ( projects
-    ) where
+  ( projects
+  ) where
 
 import           XMonad.Actions.DynamicProjects
 import           XMonad.Actions.SpawnOn
-import qualified XMonad.Custom.Misc             as C
+import qualified XMonad.Custom.Misc            as C
 
 projects :: [Project]
 projects =
-    [ Project { projectName      = "Template"
-              , projectDirectory = "~/"
-              , projectStartHook = Nothing
-              }
-
-    , Project { projectName      = "Emacs"
-              , projectDirectory = "~/"
-              , projectStartHook = Just $ spawnOn "Emacs" "emacsclient"
-              }
-
-    , Project { projectName      = "WWW"
-              , projectDirectory = "~/"
-              , projectStartHook = Just $ spawnOn "WWW" (C.browser C.applications)
-              }
-    ]
+  [ Project { projectName      = "Template"
+            , projectDirectory = "~/"
+            , projectStartHook = Nothing
+            }
+  , Project { projectName      = "Emacs"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ spawnOn "Emacs" "emacsclient"
+            }
+  , Project { projectName      = "WWW"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ spawnOn "WWW" (C.browser C.applications)
+            }
+  ]
